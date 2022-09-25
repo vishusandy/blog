@@ -9,6 +9,7 @@ on:
 
 jobs:
   zola:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install Zola
@@ -16,7 +17,6 @@ jobs:
       - name: Zola Build
         run: ./zola build
       - name: Deploy Zola
-        if: github.ref == 'refs/heads/main'
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
