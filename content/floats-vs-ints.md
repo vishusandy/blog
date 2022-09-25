@@ -36,13 +36,16 @@ Epsilon in Python is represented by `sys.float_info.epsilon`
 
 ```python
 import sys
-
 a = 0.15 + 0.15
 b = 0.1 + 0.2
 
 print(f'{a=} {b=}') # a=0.3 b=0.30000000000000004
-print(a == b) # False
-print(abs(a - b) < sys.float_info.epsilon) # True
+
+print(a == b)
+# false
+
+print(abs(a - b) < sys.float_info.epsilon)
+# true
 ```
 
 #### Epsilon in JavaScript
@@ -53,9 +56,14 @@ Epsilon in JavaScript is represented by `Number.EPSILON`
 const a = 0.15 + 0.15;
 const b = 0.1 + 0.2;
 
-console.log(`a=${a} b=${b}`) // a=0.3 b=0.30000000000000004
-console.log(a == b); // false
-console.log(Math.abs(a-b) < Number.EPSILON); // true
+console.log(`a=${a} b=${b}`)
+// a=0.3 b=0.30000000000000004
+
+console.log(a == b);
+// false
+
+console.log(Math.abs(a-b) < Number.EPSILON);
+// true
 ```
 
 Notice the value of `b`, which returns 0.30000000000000004.
@@ -69,9 +77,14 @@ Likewise, trying `0.0 / 0.0` will produce another special value called `NaN` whi
 Here are some more examples of surprising behavior:
 
 ```javascript
-console.log(0.0/0.0 == 0.0/0.0); // false: NaN does NOT equal Nan
-console.log(-0.0 == 0.0); // true: zero is zero regardless of the sign
-console.log(Number.MAX_SAFE_INTEGER - 1.1) // 9007199254740990
+console.log(0.0/0.0 == 0.0/0.0);
+// false: NaN does NOT equal Nan
+
+console.log(-0.0 == 0.0);
+// true: zero is zero regardless of the sign
+
+console.log(Number.MAX_SAFE_INTEGER - 1.1)
+// 9007199254740990
 
 ```
 

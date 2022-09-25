@@ -26,6 +26,7 @@ pre code.hljs {
     border-radius: 0;
     padding: 1.2rem;
     // inline-size: min-content;
+    // width: 100%;
     margin-left: 0rem;
     margin-right: 0rem;
     margin-bottom: 1rem;
@@ -34,14 +35,14 @@ pre code.hljs {
     tab-size: 4;
     font-size: 1rem;
     word-spacing: normal;
-    white-space: pre;
-    overflow-x: scroll;
+    white-space: pre-wrap;
+    // overflow-x: scroll;
     // overflow-wrap: break-word;
 }
 
 pre code.hljs span {
-    overflow-x: auto;
-    overflow-wrap: break-all;
+    // overflow-x: auto;
+    // overflow-wrap: break-word;
 
 }
 
