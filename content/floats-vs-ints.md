@@ -8,7 +8,7 @@ description = ""
 
 Floating-point numbers are stored in a way that resembles scientific notation. It stores two parts: a decimal number between 0 and 1 (called the *mantissa*) and an exponent, along with a bit used to represent whether it is a positive or negative number. Normal integers are stored in simpler format without exponents, and always represent a whole number.
 
-There two main two types of floating-point numbers: the [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) `single` (binary32) and `double` (binary64) precision floating-point numbers. Other, less popular, formats for storing decimal numbers exist but for the rest of this article assume either `single` or `double` when I mention a floating-point number.
+There two main two types of floating-point numbers: the [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) `single` (binary32) and `double` (binary64) precision floating-point numbers. Other, less popular, formats for storing decimal numbers exist but for the rest of this article you should assume either `single` or `double` when I mention a floating-point number.
 
 If you use JavaScript you're actually using 64bit floating point numbers - or `double`s for those familiar with C or Java.
 
@@ -16,7 +16,7 @@ If you use JavaScript you're actually using 64bit floating point numbers - or `d
 
 ## Accuracy
 
-Perhaps the most overlooked aspect of floating-point numbers is their accuracy. Take the example of adding `0.1 + 0.2` from [The Floating-Point Guide](https://floating-point-gui.de/errors/comparison/). If you tried this in JavaScript or Python you would *not* get the value `0.3` but instead something like `0.30000000000000004`. However, `0.15 + 0.15` will work and returns `0.3`. This is a result of storing decimal numbers in a binary format.
+Perhaps the most overlooked aspect of floating-point numbers is their accuracy. Take the example of adding `0.1 + 0.2` from [The Floating-Point Guide](https://floating-point-gui.de/errors/comparison/). If you tried this in JavaScript or Python you would *not* get the value `0.3` but instead something like `0.30000000000000004`. However, `0.15 + 0.15` will work and returns `0.3`.  The floating-point formats have limited precision so there will often be some kind of *rounding error*.
 
 A common pitfall is checking equality of two floating-point numbers where one or both are the result of computation. The following returns `false`:
 

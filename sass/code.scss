@@ -6,7 +6,7 @@
 code:not([class~=hljs]) {
     background-color: rgba(27, 31, 35, .09);
     border-radius: 3px;
-    font-size: 85%;
+    font-size: 0.85rem;
     margin: 0;
     padding: .3em .4em;
     font-family: SFMono-Regular,
@@ -25,15 +25,24 @@ pre code.hljs {
     border: 1px solid #e5e5e5;
     border-radius: 0;
     padding: 1.2rem;
+    // inline-size: min-content;
     margin-left: 0rem;
     margin-right: 0rem;
     margin-bottom: 1rem;
     text-shadow: 0 1px white;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     tab-size: 4;
-    font-size: 85%;
+    font-size: 1rem;
     word-spacing: normal;
     white-space: pre;
+    overflow-x: scroll;
+    // overflow-wrap: break-word;
+}
+
+pre code.hljs span {
+    overflow-x: auto;
+    overflow-wrap: break-all;
+
 }
 
 .hljs-comment,
@@ -61,7 +70,6 @@ pre code.hljs {
 
 .hljs-punctuation,
 .hljs-attr {
-    // color: #2a2c2d;
     color: #999;
 }
 
@@ -103,7 +111,6 @@ pre code.hljs {
 .hljs-title.class_.inherited__,
 .hljs-meta .hljs-string {
     color: #690;
-    // color: #0d7d6c;
 }
 
 .hljs-variable,
@@ -120,6 +127,5 @@ pre code.hljs {
 .hljs-attribute,
 .hljs-template-tag,
 .hljs-meta .hljs-keyword {
-    // color: #7641bb;
     color: #bb4188;
 }
