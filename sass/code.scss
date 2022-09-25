@@ -18,15 +18,12 @@ code:not([class~=hljs]) {
 }
 
 pre code.hljs {
-    // color: #2a2c2d;
     display: block;
     color: #000;
     background: #f6f8fa;
     border: 1px solid #e5e5e5;
     border-radius: 0;
     padding: 1.2rem;
-    // inline-size: min-content;
-    // width: 100%;
     margin-left: 0rem;
     margin-right: 0rem;
     margin-bottom: 1rem;
@@ -36,14 +33,6 @@ pre code.hljs {
     font-size: 1rem;
     word-spacing: normal;
     white-space: pre-wrap;
-    // overflow-x: scroll;
-    // overflow-wrap: break-word;
-}
-
-pre code.hljs span {
-    // overflow-x: auto;
-    // overflow-wrap: break-word;
-
 }
 
 .hljs-comment,
