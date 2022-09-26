@@ -52,19 +52,13 @@ print(abs(a - b) < sys.float_info.epsilon)
 
 Epsilon in JavaScript is represented by `Number.EPSILON`
 
-```javascript
-const a = 0.15 + 0.15;
-const b = 0.1 + 0.2;
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="js,result" data-slug-hash="rNvpOGj" data-preview="true" data-editable="true" data-user="andyprindle" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/andyprindle/pen/rNvpOGj">
+  JS Number Comparison</a> by Andrew Prindle (<a href="https://codepen.io/andyprindle">@andyprindle</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-console.log(`a=${a} b=${b}`)
-// a=0.3 b=0.30000000000000004
-
-console.log(a == b);
-// false
-
-console.log(Math.abs(a-b) < Number.EPSILON);
-// true
-```
 
 Notice the value of `b`, which returns 0.30000000000000004.
 
@@ -74,19 +68,14 @@ Floating-point numbers can also represent special values like infinity and negat
 
 Likewise, trying `0.0 / 0.0` will produce another special value called `NaN` which stands for "Not a Number". These can propagate through math operations, which may cause some confusion to programmers who expect invalid operations to just throw an error. So `0.0 / 0.0 + 2.0 + 10.0` will still give us a `NaN` - the 0 divided by 0 "poisoned" it so that all following operations in the computation also produce `NaN`. There are also two types of `NaN`, but I won't get into that here.
 
-Here are some more examples of surprising behavior:
+Here are some more examples of surprising behavior in JavaScript:
 
-```javascript
-console.log(0.0/0.0 == 0.0/0.0);
-// false: NaN does NOT equal Nan
-
-console.log(-0.0 == 0.0);
-// true: zero is zero regardless of the sign
-
-console.log(Number.MAX_SAFE_INTEGER - 1.1)
-// 9007199254740990
-
-```
+<p class="codepen" data-height="600" data-theme-id="dark" data-default-tab="js,result" data-slug-hash="poVpjVy" data-preview="true" data-editable="true" data-user="andyprindle" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/andyprindle/pen/poVpjVy">
+  Untitled</a> by Andrew Prindle (<a href="https://codepen.io/andyprindle">@andyprindle</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## Performance
 

@@ -106,17 +106,14 @@ Since the formula for a circle only gives us positive values (due the squaring) 
 
 Squaring `x` and `y` will give us a positive value regardless of whether the original value was negative or positive.  To fix this we have to translate the coordinates depending on the quadrant.  The different values for the quadrants are: (x, y) (x, -y), (-x, -y) and (-x, y).
 
-So a value of (5, 9), depending on the quadrant, could translate into: 
+Translating the value of (5, 9) from one quadrant to the others would give: 
 
 - (5, 9)
-
 - (5, -9)
-
 - (-5, -9)
+- (-5, 9)
 
-- (-5, 9).
-
-Here is some code to draw a circle by translating each pixel into all 4 quadrants:
+Here is some Python code to draw a circle by translating each pixel into all 4 quadrants:
 
 ```python
 x = 0
