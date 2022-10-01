@@ -19,7 +19,7 @@ $$
 
 There are a few things to note here:
 
-1. The actual values for `x` and `y` will be floating point numbers.  Unfortunately it's difficult to represent a fraction of a pixel in a normal image, so we'll have to somehow choose which values to draw.
+1. The actual values for `x` and `y` will be floating-point numbers.  Unfortunately it's difficult to represent a fraction of a pixel in a normal image, so we'll have to somehow choose which values to draw.
 
 2. The variables are squared, so negative values are lost.  If you think of the circle as being divided into quadrants each quadrant will still use the same numbers `x` and `y` but with either a positive or negative value for each coordinate.
 
@@ -43,9 +43,12 @@ $$
 
 So the actual point is (5, 8.66) but we need a whole number to put it onto an image, so we round to (5, 9). This is is important to remember: we are *approximating* the integer coordinates; the pixel drawn on the image doesn't represent the exact point on the circle.
 
-As an example consider the following image where the grid lines represents a pixel's coordinates.  You can see how the actual coordinates lie somewhere between two pixels.
+As an example consider the following image:
 
-<img title="Pixel locations vs circle coordinates" src="../assets/draw-a-circle/pixel_coordinates.png" alt="Grid showing how points in a circle land somewhere between two pixels" class="img-center">
+<figure>
+    <img title="Pixel locations vs circle coordinates" src="../assets/draw-a-circle/pixel_coordinates.png" alt="Grid showing how points in a circle land somewhere between two pixels" class="img-center">
+    <figcaption>The grid lines represent exact integer coordinates.  The coordinates in the circle are floating-points numbers so the actual points usually lie somewhere between two pixels.</figcaption>
+</figure>
 
 ### Solving for `y`
 
@@ -78,13 +81,19 @@ while x < r:
 img.save("naive_circle_attempt.png")
 ```
 
-<center>The above code produces:</center>
+<p>The above code produces:</p>
 
-<img title="Circle attempt" src='../assets/draw-a-circle/naive_circle_attempt.png' alt="A circle with vertical gaps between pixels on the left and right sides" class="img-center img-border">
+<figure>
+    <img title="Circle attempt" src='../assets/draw-a-circle/naive_circle_attempt.png' alt="A circle with vertical gaps between pixels on the left and right sides" class="img-center img-border">
+    <figcaption>Notice the vertical gaps between pixels on the left and right sides</figcaption>
+</figure>
 
-<center>This zoomed-in image gives us a better look at the sides:</center>
+<p>This zoomed-in image gives us a better look at the sides:</p>
 
+<figure>
 <img title="Zoomed in circle attempt" src="../assets/draw-a-circle/naive_circle_attempt_zoomed.png" alt="Zoomed in view of a circle with vertical gaps between pixels on the right side" class="img-center img-border">
+<figcaption>One pixel is plotted for every x coordinate</figcaption>
+</figure>
 
 This isn't exactly what we want but its close.  Let's examine what went wrong.
 
@@ -164,9 +173,10 @@ You will still use the positive/negative values from the quadrants but also tran
 
 > Note: swapping x and y to rotate 45° only works with a center of (0, 0).  If you need to convert between an image's actual coordinates you will have to subtract out the center coordinates.
 
-<center>Octants</center>
-
-<img title="Octants" src="../assets/draw-a-circle/octants.png" alt="Diagram of octant numbering" class="img-center">
+<figure>
+    <figcaption class="title">Octants</figcaption>
+    <img title="Octants" src="../assets/draw-a-circle/octants.png" alt="Diagram of octant numbering for a circle.  Octant 1 is at the bottom of the top-right quadrant; octants move counter-clockwise." class="img-center">
+</figure>
 
 ### Looping Over Octants
 
@@ -278,9 +288,12 @@ for x in range(ffd):
 img.save("simple_antialiased_octant.png")
 ```
 
-<center>And here's the results up close:</center>
+And here's the results up close:
 
-<img title="Antialiased octant" src="../assets/draw-a-circle/antialiased_octant.png" alt="A single octant of a circle drawn with antialiasing to create a smooth look" class="img-center img-border">
+<figure>
+    <img title="Antialiased octant" src="../assets/draw-a-circle/antialiased_octant.png" alt="A single octant of a circle drawn with antialiasing to create a smooth look" class="img-center img-border">
+    <figcaption>Two adjacent pixels are drawn for each x coordinate.  They are blended into the image based on their opacities.  This better represents fractional coordinates on a pixel grid.</figcaption>
+</figure>
 
 It should be noted there are other ways to implement simple antialiasing besides just splitting the opacity between the two nearest pixels.  You could use other weighting schemes for opacities or patterns for choosing which pixels to use.  For example, changing the how a desired is blended into the existing color based on whether the current pixel was a horizontal/vertical step or diagonal step.  Diagonal steps have a greater distance from the last pixel than horizontal or vertical steps so you could achieve better results by changing the blending for them.  Each have advantages and disadvantages.
 
@@ -358,13 +371,13 @@ This can be further optimized to avoid squaring, but this represents the basics 
 
 ### Bresenham's Algorithm
 
-Everything above assumes we're using floating point variables to calculate values.  While the extra precision is convenient, it's not necessary for drawing circles.
+Everything above assumes we're using floating-point variables to calculate values.  While the extra precision is convenient, it's not necessary for drawing circles.
 
-> I won't cover the reasons to use integers over floating point numbers here, but there are some important details to consider when making that choice (like Epsilon values and performance).  I will add another blog post to discuss the choice of integers over floats.
+> I won't cover the reasons to use integers over floating-point numbers here, but there are some important details to consider when making that choice (like Epsilon values and performance).  I will add another blog post to discuss the choice of integers over floats.
 > 
 > It should be noted that using integers makes it more difficult to implement antialiasing, [but not impossible](http://www.landkey.net/d/antialiased/wu4_RF/Content/WU/src/NoSqrt.java.htm).
 
-Bresenham's circle algorithm is a modification of the Midpoint Circle algorithm that removes floating point numbers, allowing it to work just with integers.  I won't explain the math here, but here is some python code demonstrating how it works:
+Bresenham's circle algorithm is a modification of the Midpoint Circle algorithm that removes floating-point numbers, allowing it to work just with integers.  I won't explain the math here, but here is some python code demonstrating how it works:
 
 ```python
 x = 0

@@ -87,7 +87,7 @@ Even casting a floating-point number to an integer number can affect performance
 
 ### Vector Instructions
 
-To get around performance issues processors introduced special, low-level, vector instruction sets, like SSE and AVX, that are able to perform operations on multiple numbers at once. This is actually a type of parallel programming.
+To help with performance issues processors introduced special, low-level, vector instruction sets, like SSE and AVX, that are able to perform operations on multiple numbers at once. This is actually a type of parallel programming.
 
 For example, if you wanted to multiple the following vectors of numbers together, you would normally loop from <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Terminology"><dfn title="A range including 0 but excluding 4">[0..4)</dfn></a> and multiply corresponding elements, like:
 

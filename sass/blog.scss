@@ -8,6 +8,30 @@ a {
 
 }
 
+figure:not(.code) img,
+figure:not(.code) img.img-center {
+    margin-bottom: 0.4rem;
+}
+
+figcaption {
+    color: #4c4e52;
+    text-align: center;
+    width: 70%;
+    margin: 0px auto;
+}
+
+figcaption.title {
+    color: #282828;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+body {
+    padding: 0.6rem;
+    font-family: $font-stack;
+    color: #282828;
+}
+
 article {
     min-width: 200px;
     max-width: 850px;
@@ -15,12 +39,6 @@ article {
     box-sizing: border-box;
     line-height: 1.3;
     padding-bottom: 5rem;
-}
-
-body {
-    padding: 0.6rem;
-    font-family: $font-stack;
-    color: #282828;
 }
 
 h1 {
