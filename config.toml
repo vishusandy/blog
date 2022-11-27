@@ -1,3 +1,6 @@
+
+title = "Vishus Blog"
+
 # The URL the site will be built for
 base_url = "https://vishusandy.github.io"
 
@@ -12,7 +15,26 @@ highlight_code = false
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
+# taxonomies = [{ name = "tags", feed = true }]
+
 [extra]
-# Put all your custom variables here
 katex_enable = true
 katex_auto_render = true
+
+# [[extra.links]]
+# text = "Floats"
+# url = "floats-vs-ints"
+# static_url = false
+# external = false
+
+# [[extra.links]]
+# text = "<i class=\"link-icon fa-brands fa-instagram\"></i>"
+# url = "https://www.instagram.com/vishusandy/"
+# static_url = true
+# new_window = true
+
+[[extra.links]]
+text = "<i class=\"link-icon fa-brands fa-github\" alt=\"My Github page\" title=\"My Github page\"></i>"
+url = "https://github.com/vishusandy"
+static_url = true
+new_window = true

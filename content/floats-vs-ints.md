@@ -1,7 +1,7 @@
 +++
 title = "Floating-points All the Way Down"
 date = 2022-09-23
-description = ""
+description = "A technical look at using floating-point numbers"
 +++
 
 ## Floating-point representation

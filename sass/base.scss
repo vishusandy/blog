@@ -1,0 +1,46 @@
+$font-stack: Georgia, Palatino, "Palatino Linotype", "Times New Roman", "DejaVu Serif", serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+body {
+    font-family: $font-stack;
+    color: #282828;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0.6rem;
+    font-size: calc(max(17px, 1rem));
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 3rem;
+}
+
+header .title {
+    font-size: 1.5rem;
+}
+
+header .links {
+    font-size: 1.1rem;
+}
+
+header .links ul {
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+header .links li {
+    display: inline;
+    margin-right: 0.2rem;
+    vertical-align: top;
+}
+
+header .links .link-icon {
+    font-size: 2rem;
+}
+
+a {
+    color: #212121;
+    text-decoration: underline;
+}

@@ -1,7 +1,27 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" href='{{ get_url(path="index.css") }}'>
+{% endblock css %}
+
 {% block content %}
-<h1 class="title">
-    This is my blog made with Zola.
-</h1>
+    <!-- If you are using pagination, section.pages will be empty. You need to use the paginator object -->
+    {% for page in paginator.pages %}
+        <article>
+            <div class="date">
+                <time datetime="{{ page.date }}">{{ page.date }}</time>
+            </div>
+            <div class="title">
+                <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+            </div>
+        </article>
+    {% endfor %}
+    <nav class="pagination">
+        {% if paginator.previous %}
+        <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+        {% endif %}
+        {% if paginator.next %}
+        <a class="next" href="{{ paginator.next }}">Next ›</a>
+        {% endif %}
+    </nav>
 {% endblock content %}

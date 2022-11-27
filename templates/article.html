@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block js %}
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"
+    integrity="sha512-gU7kztaQEl7SHJyraPfZLQCNnrKdaQi5ndOyt4L4UPL/FHDd/uB9Je6KDARIqwnNNE27hnqoWLBq+Kpe4iHfeQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/python.min.js"
+    integrity="sha512-iDlDwqOvWrZasw1DKx/EN1onOhfSdVh86HnlN64ndFMFtqa4ojwfWMit4B7KmZ7b7bMAaFZA8PnwWMBhfGbS2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>hljs.highlightAll();</script>
+{% if config.extra.katex_enable %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+{% if config.extra.katex_auto_render %}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+{% endif %}{% endif %}{% endblock js %}
+
+{% block css %}
+<link rel="stylesheet" href='{{ get_url(path="code.css") }}'>
+<link rel="stylesheet" href='{{ get_url(path="article.css") }}'>
+{% if config.extra.katex_enable %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+{% endif %}
+{% endblock css %}
+
+{% block content %}
+<article id="top" class="markdown-body">
+    <h1 class="title">
+        {{ page.title }}
+    </h1>
+    <p class="subtitle"><strong>
+        
+    {% if page.updated is string %}Created: {% endif %}
+    {{ page.date }}
+    {% if page.updated %}&nbsp;&nbsp;&nbsp;Updated {{ page.updated }}{% endif %}
+    </strong></p>
+    
+    {% if page.description %}
+    <p>{{ page.description | safe }}</p>
+    {% endif %}
+    
+    
+    {% if page.toc %}
+    <div class="toc">
+    <p><strong>Table of Contents:</strong></p>
+        <ul>
+            {% for h1 in page.toc %}
+                <li>
+                    <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                    {% if h1.children %}
+                        <ul>
+                            {% for h2 in h1.children %}
+                                <li>
+                                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    
+    {{ page.content | safe }}
+</article>
+{% endblock content %}

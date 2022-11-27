@@ -5,35 +5,31 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-        {% block js %}
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"
-            integrity="sha512-gU7kztaQEl7SHJyraPfZLQCNnrKdaQi5ndOyt4L4UPL/FHDd/uB9Je6KDARIqwnNNE27hnqoWLBq+Kpe4iHfeQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/python.min.js"
-                integrity="sha512-iDlDwqOvWrZasw1DKx/EN1onOhfSdVh86HnlN64ndFMFtqa4ojwfWMit4B7KmZ7b7bMAaFZA8PnwWMBhfGbS2A=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>hljs.highlightAll();</script>
-        {% if config.extra.katex_enable %}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
-            integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
-            integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
-            crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
-            integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
-            crossorigin="anonymous"></script>
-        {% if config.extra.katex_auto_render %}<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
-                integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-                onload="renderMathInElement(document.body);"></script>
-        {% endif %}{% endif %}{% endblock js %}
-        {% block css %}<link rel="stylesheet" href='{{ get_url(path="code.css") }}'>
-        <link rel="stylesheet" href='{{ get_url(path="blog.css") }}'>
-        {% if config.extra.katex_enable %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
-            integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">{% endif %}{% endblock css %}
+        <link rel="stylesheet" href='{{ get_url(path="base.css") }}'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% block css %} {% endblock css %}
+        {% block js %} {% endblock js %}
     </head>
 
     <body>
+        <header>
+            <div class="title">
+                <a href="{{ get_url(path="/") }}">{{ config.title }}</a>
+            </div>
+            {% if config.extra.links %}
+                <div class="links">
+                    <ul>
+                        {% for link in config.extra.links %}
+                        <li><a href="{% if link.static_url %}{{ link.url | safe }}{% else %}{{ get_url(path=link.url) | safe }}{% endif %}" {% if link.new_window %}target="_blank" rel="noreferrer noopener"{% endif %}>{{ link.text | safe }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+        </header>
+        
         <section class="section">
             <div class="container">
                 {% block content %} {% endblock %}
