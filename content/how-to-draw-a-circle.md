@@ -9,6 +9,7 @@ description = "Recently I spent some time working on how to draw circles and arc
 Recently I spent some time working on how to draw circles and arcs.  I needed to draw antialiased arcs, partial <dfn id="annulus-def" title="Annulus: a filled donut shape">annuli</dfn>, and antialiased circles but the library I was using didn't support them.  Graphics programming is interesting, and since there's nothing programmers love more than an interesting problem it was a great excuse to have a little fun.
 -->
 
+
 ## Considerations for Drawing a Circle
 
 The equation for a circle is: 

@@ -1,7 +1,7 @@
 +++
 title = "Floating-points All the Way Down"
 date = 2022-09-23
-description = "A technical look at using floating-point numbers"
+description = "Floating-point numbers are widely used.  In languages like JavaScript they are the sole numeric type (BigInt aside), yet their behavior can have surprising effects.  In order to write performant, bug-free code it helps to understand their representation and quirks."
 +++
 
 ## Floating-point representation
@@ -76,6 +76,7 @@ Here are some more examples of surprising behavior in JavaScript:
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<p></p>
 
 ## Performance
 

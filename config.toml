@@ -34,7 +34,11 @@ katex_auto_render = true
 # new_window = true
 
 [[extra.links]]
-text = "<i class=\"link-icon fa-brands fa-github\" alt=\"My Github page\" title=\"My Github page\"></i>"
+text = "<i class=\"link-icon fa-brands fa-github\" alt=\"My GitHub profile\" title=\"My GitGub\"></i>"
 url = "https://github.com/vishusandy"
 static_url = true
 new_window = true
+
+[[extra.links]]
+text = "Links"
+url = "/pages/links"
