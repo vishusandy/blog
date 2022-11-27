@@ -23,9 +23,6 @@ hide_toc = true
     - [Parsing Decimals 4 times faster - Cantor Trading](https://cantortrading.fi/rust_decimal_str/)
     - [Bit Twiddling Hacks - Stanford](https://graphics.stanford.edu/~seander/bithacks.html)
     - [Faster Than Bresenham's Algorithm - HBFS](https://hbfs.wordpress.com/2009/07/28/faster-than-bresenhams-algorithm/)
-    - [Pointers Are Complicated I - Ralfj](https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html)
-    - [Pointers Are Complicated II - Ralfj](https://www.ralfj.de/blog/2020/12/14/provenance.html)
-    - [Pointers Are Complicated III - Ralfj](https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html)
 
 - ### Linux
 
@@ -39,6 +36,10 @@ hide_toc = true
     - [Category Theory with Rust (pt1) - Kurt Lawrence](https://www.kurtlawrence.info/blog/category-theory-with-rust-pt1)
     - [Quaternions: A practical guide - AnyLeaf](https://www.anyleaf.org/blog/quaternions:-a-practical-guide)
     - [Sorting Algorithms Blender - Github](https://github.com/ForeignGods/Sorting-Algorithms-Blender)
+    - [Pointers Are Complicated - Ralfj](https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html)
+        - [Pointers Are Complicated I](https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html)
+        - [Pointers Are Complicated II](https://www.ralfj.de/blog/2020/12/14/provenance.html)
+        - [Pointers Are Complicated III](https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html)
 
 - ### Security
     - [Corrupting memory without memory corruption - GitHub Blog](https://github.blog/2022-07-27-corrupting-memory-without-memory-corruption/)
