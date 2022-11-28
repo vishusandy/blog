@@ -6,13 +6,13 @@ description = "Floating-point numbers are widely used.  In languages like JavaSc
 
 ## Floating-point representation
 
-Floating-point numbers are stored in a way that resembles scientific notation. It stores two parts: a decimal number between 0 and 1 (called the *mantissa*) and an exponent, along with a bit used to represent whether it is a positive or negative number. Normal integers are stored in simpler format without exponents, and always represent a whole number.
+I won't delve too deeply (or greedily) into exactly how IEEE 754 numbers are represented (lest we discover what they awoke in the darkness of Khazad-dum); there's just too much to cover here.  Floating-point numbers are stored in a way that resembles scientific notation. It stores two parts: a decimal number between 0 and 1 (called the *mantissa*) and an exponent, along with a bit used to represent whether it is a positive or negative number.
 
 There two main two types of floating-point numbers: the [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) `single` (binary32) and `double` (binary64) precision floating-point numbers. Other, less popular, formats for storing decimal numbers exist but for the rest of this article you should assume either `single` or `double` when I mention a floating-point number.
 
 If you use JavaScript you're actually using 64bit floating point numbers - or `double`s for those familiar with C or Java.
 
-> Well that's not entirely true - there are some internal optimizations that can represent some numbers as integers, but you should just assume all numbers in JavaScript are represented as `double`s (with the exception of explicitly using [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)s, in which case you already know you're using integers). For more on JS optimization I recommend reading the [V8 Blog](https://v8.dev/blog)
+> Well that's not entirely true - there are some internal optimizations that can represent some numbers as integers, but you should just assume all numbers in JavaScript are represented as `double`s ([`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)s aside). For more on JS optimization I recommend reading the [V8 Blog](https://v8.dev/blog)
 
 ## Accuracy
 
