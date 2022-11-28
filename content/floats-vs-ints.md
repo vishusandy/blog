@@ -1,6 +1,7 @@
 +++
 title = "Floating-points All the Way Down"
 date = 2022-09-23
+updated = 2022-11-28
 description = "Floating-point numbers are widely used.  In languages like JavaScript they are the sole numeric type (BigInt aside), yet their behavior can have surprising effects.  In order to write performant, bug-free code it helps to understand their representation and quirks."
 +++
 

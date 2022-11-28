@@ -48,9 +48,22 @@ header .links .link-icon {
     font-size: 2rem;
 }
 
-a {
-    color: #212121;
-    text-decoration: underline;
+.subtitle {
+    margin-top: 0px;
+    margin-bottom: 2rem;
+    padding-left: 0em;
+    font-size: 1.3rem;
+    color: #55565c;
+    text-align: center;
+}
+
+.subtitle div.created,
+.subtitle div.updated {
+    display: block;
+}
+
+.subtitle a {
+    color: #4c4d52;
 }
 
 h1 {
@@ -87,8 +100,6 @@ h6 {
     margin: .1rem 0px .5rem;
 }
 
-section.container {}
-
 section.toc {
     background-color: #f8f5f1;
     padding: .5rem;
@@ -119,4 +130,9 @@ div.toc ul {
 
 div.toc li {
     margin-bottom: .3rem;
+}
+
+a {
+    color: #212121;
+    text-decoration: underline;
 }

@@ -15,23 +15,11 @@ h1.title {
     text-align: center;
 }
 
-.subtitle {
-    margin-top: 0px;
-    margin-bottom: 2rem;
-    padding-left: 0em;
-    font-size: 1.2rem;
-    color: #55565c;
-    text-align: center;
+
+.subtitle .updated {
+    font-size: 1rem;
 }
 
-.subtitle strong {
-    font-weight: 400;
-}
-
-a {
-    color: #212121;
-    text-decoration: underline;
-}
 
 
 .zola-anchor {
@@ -78,4 +66,9 @@ dfn:hover {
 .img-border {
     padding: 4px;
     border: 1px solid #aaa;
+}
+
+a {
+    color: #212121;
+    text-decoration: underline;
 }

@@ -2,33 +2,50 @@
 title = "Links"
 date = 2022-11-27
 template = "page.html"
-description = "Interesting links"
+description = ""
+updated = 2022-11-28
 [extra]
 hide_toc = true
-# updated = 2022-09-23
 +++
 
 
 
-## Personal
+<details open="true">
+<summary>
+<h2>Personal</h2>
+</summary>
 
 - [GitHub](https://github.com/vishusandy)
 - [Instagram](https://www.instagram.com/vishusandy/)
 
+</details>
 
-## Topics
 
-- ### Performance & Low-Level
+<details open="true">
+<summary>
+<h2>Interesting Articles</h2>
+</summary>
 
-    - [Parsing Decimals 4 times faster - Cantor Trading](https://cantortrading.fi/rust_decimal_str/)
-    - [Bit Twiddling Hacks - Stanford](https://graphics.stanford.edu/~seander/bithacks.html)
-    - [Faster Than Bresenham's Algorithm - HBFS](https://hbfs.wordpress.com/2009/07/28/faster-than-bresenhams-algorithm/)
+- [How fast are Linux pipes anyway - Mazzo](https://mazzo.li/posts/fast-pipes.html)
+- [Parsing Decimals 4 times faster - Cantor Trading](https://cantortrading.fi/rust_decimal_str/)
+- [Bit Twiddling Hacks - Stanford](https://graphics.stanford.edu/~seander/bithacks.html)
+- [Faster Than Bresenham's Algorithm - HBFS](https://hbfs.wordpress.com/2009/07/28/faster-than-bresenhams-algorithm/)
+
+</details>
+
+<details>
+<summary>
+<h2>More Articles</h2>
+<!-- Some links on various topics I found really interesting. -->
+</summary>
 
 - ### Linux
 
     - [The Definitive Guide to Linux System Calls - PackageCloud Blog](https://blog.packagecloud.io/the-definitive-guide-to-linux-system-calls/)
     - [How Wine works 101 - Reboot and Shine](https://werat.dev/blog/how-wine-works-101/)
-    - [How fast are Linux pipes anyway - Mazzo](https://mazzo.li/posts/fast-pipes.html)
+
+- ### Security
+    - [Corrupting memory without memory corruption - GitHub Blog](https://github.blog/2022-07-27-corrupting-memory-without-memory-corruption/)
 
 - ### Computer Science & Algorithms
     - [Compiler Optimizations Are Hard Because They Forget - Faultlore](https://faultlore.com/blah/oops-that-was-important/)
@@ -41,14 +58,11 @@ hide_toc = true
         - [Pointers Are Complicated II](https://www.ralfj.de/blog/2020/12/14/provenance.html)
         - [Pointers Are Complicated III](https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html)
 
-- ### Security
-    - [Corrupting memory without memory corruption - GitHub Blog](https://github.blog/2022-07-27-corrupting-memory-without-memory-corruption/)
-
 - ### General Programming
     - [Best Practices for Naming Variables: What the Research Shows - The New Stack](https://thenewstack.io/best-practices-for-naming-variables-what-the-research-shows/)
 
-- ### Developer / Misc
-    - [Researchers have a formula for getting in the flow](https://phys.org/news/2022-04-formula.html)
+- ### Misc
+    - [Researchers have a formula for getting in the flow - [Phys.org]](https://phys.org/news/2022-04-formula.html)
 
 ## Languages
 - ### Rust
@@ -57,11 +71,20 @@ hide_toc = true
 - ### SQL
     - [Rewrite OR to UNION in PostgreSQL queries - Cybertec](https://www.cybertec-postgresql.com/en/rewrite-or-to-union-in-postgresql-queries/)
 
-## Blogs
+</details>
 
-- ### Performance
+<details>
+<summary>
+<h2>Blogs I Like</h2>
+</summary>
+
+- ### Performance & Low-level
     - [v8 blog](https://v8.dev/blog)
     - [Johnny's Software Lab](https://johnnysswlab.com/)
+    - [Ubitux](http://blog.pkh.me/index.html)
+
+- ### Security
+    - [Schneier on Security](https://www.schneier.com/)
 
 - ### Rust
     - [Matklad](https://matklad.github.io/)
@@ -69,13 +92,22 @@ hide_toc = true
     - [Without Boats](https://without.boats/blog/)
     - [Llogiq on Stuff](https://llogiq.github.io/)
     - [Carol's 10 Cents](http://carol-nichols.com/)
-    - [LogRocket Blog](https://blog.logrocket.com/)
+    - [Huon](https://huonw.github.io/)
 
 - ### Tech
     - [Cloudflare Blog](https://blog.cloudflare.com/)
     - [GitHub Blog](https://github.blog/)
+    - [LogRocket Blog](https://blog.logrocket.com/)
     - [Hackaday Blog](https://hackaday.com/blog/)
 
-## Resources
+</details>
+
+<details>
+<summary>
+<h2>Resources</h2>
+</summary>
 
 - [Big list of naughty strings](https://github.com/minimaxir/big-list-of-naughty-strings) - "an evolving list of strings which have a high probability of causing issues when used as user-input data"
+- [Firefox Monitor](https://monitor.firefox.com/)
+
+</details>
