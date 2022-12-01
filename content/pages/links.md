@@ -3,9 +3,7 @@ title = "Links"
 date = 2022-11-27
 template = "page.html"
 description = ""
-updated = 2022-11-28
-[extra]
-hide_toc = true
+updated = 2022-12-01
 +++
 
 
@@ -17,6 +15,7 @@ hide_toc = true
 
 - [GitHub](https://github.com/vishusandy)
 - [Instagram](https://www.instagram.com/vishusandy/)
+- [Mastodon](https://social.linux.pizza/@vishus)
 
 </details>
 
