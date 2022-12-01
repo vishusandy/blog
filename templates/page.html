@@ -10,7 +10,7 @@
     </h1>
     
     <div class="subtitle">
-            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md">Updated <time class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
+            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md" target="_blank" rel="noreferrer noopener">Updated <time titled="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
     </div>
     
     {% if page.description %}

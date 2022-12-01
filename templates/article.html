@@ -39,11 +39,11 @@
     </h1>
     <div class="subtitle">
         {% if page.date and page.updated %}
-            {% if page.date %}<div class="created">Created <time class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
-            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md">Updated <time class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
+            {% if page.date %}<div class="created"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
+            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
         {% else %}
-            {% if page.date %}<div class="created"><time class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
-            {% if page.updated %}<div class="updated">Updated <time class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></div>{% endif %}
+            {% if page.date %}<div class="created no-update"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
+            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
         {% endif %}
     </div>
 
