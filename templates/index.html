@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block css %}
-<link rel="stylesheet" href='{{ get_url(path="index.css") }}'>
-{% endblock css %}
+{% block css %}<link rel="stylesheet" href='{{ get_url(path="index.css") | safe }}'>{% endblock css %}
 
 {% block content %}
     <!-- If you are using pagination, section.pages will be empty. You need to use the paginator object -->
@@ -12,7 +10,7 @@
                 <time datetime="{{ page.date }}">{{ page.date }}</time>
             </div>
             <div class="title">
-                <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                <a href="{{ page.permalink | safe }}">{{ page.title | safe }}</a>
             </div>
         </article>
     {% endfor %}

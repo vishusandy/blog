@@ -25,8 +25,8 @@
 {% endif %}{% endif %}{% endblock js %}
 
 {% block css %}
-<link rel="stylesheet" href='{{ get_url(path="code.css") }}'>
-<link rel="stylesheet" href='{{ get_url(path="article.css") }}'>
+<link rel="stylesheet" href='{{ get_url(path="code.css") | safe }}'>
+<link rel="stylesheet" href='{{ get_url(path="article.css") | safe }}'>
 {% if config.extra.katex_enable %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
     integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
@@ -39,46 +39,23 @@
     </h1>
     <div class="subtitle">
         {% if page.date and page.updated %}
-            {% if page.date %}<div class="created"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
-            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
-        {% else %}
-            {% if page.date %}<div class="created no-update"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif %}
-            {% if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif %}
+            {%- if page.date %}<div class="created"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif -%}
+            {%- if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") | safe }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif -%}
+        {%- else -%}
+            {%- if page.date %}<div class="created no-update"><time title="Created" class="created" datetime="{{ page.date }}">{{ page.date }}</time></div>{% endif -%}
+            {%- if page.updated %}<div class="updated"><a href="https://github.com/vishusandy/vishusandy.github.io/commits/main/content{{ page.path | trim_end_matches(pat="/") | safe }}.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="{{ page.updated }}">{{ page.updated }}</time></a></div>{% endif -%}
         {% endif %}
     </div>
-
-    {% if page.description %}
+    {%- if page.description -%}
         <p>{{ page.description | safe }}</p>
-    {% endif %}
-{% endblock %}
+    {%- endif -%}
+{% endblock -%}
 
-{% block toc %}
-{% if page.toc and not page.hide_toc %}
-<section class="toc">
-    <div class="toc">
-        <h5><strong>Table of Contents</strong></h5>
-        <ul>
-            {% for h1 in page.toc %}
-            <li>
-                <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-                {% if h1.children %}
-                <ul>
-                    {% for h2 in h1.children %}
-                    <li>
-                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</section>
-{% endif %}
-{% endblock %}
+{%- block toc %}
+{{ macros::header_toc(page=page) }}
+{% endblock -%}
 
-{% block content %}
+{%- block content %}
     <article id="top" class="markdown-body">
         {{ page.content | safe }}
     </article>

@@ -1,0 +1,52 @@
+
+{% macro header() %}
+<header>
+    <div class="title">
+        <a href="{{ get_url(path="/") | safe }}">{{ config.title }}</a>
+    </div>
+    {% if config.extra.links %}
+    <div class="links">
+        <ul>
+            {% for link in config.extra.links %}
+            <li>
+                <a href="{% if link.static_url %}{{ link.url | safe }}{% else %}{{ get_url(path=link.url) | safe }}{% endif %}"
+                    {%- if link.attribues %} {{ link.attribues | safe }}{% endif -%}
+                    {%- if link.new_window %} target="_blank" rel="noreferrer noopener"{% endif -%}
+                >
+                    {{ link.text | safe }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</header>
+{% endmacro input %}
+
+
+{% macro header_toc(page) %}
+{% if page.toc and not page.hide_toc %}
+<section class="toc">
+    <div class="toc">
+        <h5><strong>Table of Contents</strong></h5>
+        <ul>
+            {% for h1 in page.toc %}
+            <li>
+                <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                {% if h1.children %}
+                <ul>
+                    {% for h2 in h1.children %}
+                    <li>
+                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endif %}
+{% endmacro tocs %}
+

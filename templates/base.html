@@ -1,42 +1,26 @@
+{% import "macros.html" as macros %}
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{{ config.title }}{% if page %} - {{ page.title }}{% endif %}{% endblock title %}</title>
-        <link rel="stylesheet" href='{{ get_url(path="base.css") }}'>
+        <link rel="stylesheet" href='{{ get_url(path="base.css") | safe }}'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
             integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% block css %} {% endblock css %}
         {% block js %} {% endblock js %}
     </head>
-
     <body>
-        <header>
-            <div class="title">
-                <a href="{{ get_url(path="/") }}">{{ config.title }}</a>
-            </div>
-            {% if config.extra.links %}
-                <div class="links">
-                    <ul>
-                        {% for link in config.extra.links %}
-                        <li><a href="{% if link.static_url %}{{ link.url | safe }}{% else %}{{ get_url(path=link.url) | safe }}{% endif %}" {% if link.attribues %}{{ link.attribues | safe }}{% endif %} {% if link.new_window %}target="_blank" rel="noreferrer noopener"{% endif %}>{{ link.text | safe }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        </header>
+        {{ macros::header() }}
         
         {% block page_title %} {% endblock %}
         <div class="container">
-            {% block toc %}
-            {% endblock%}
+            {% block toc %} {% endblock%}
             <section class="section">
                 {% block content %} {% endblock %}
             </section>
         </div>
     </body>
-
 </html>
