@@ -32,6 +32,17 @@ h1.title {
     padding-left: 5px;
 }
 
+dfn {
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: help;
+}
+
+dfn:hover {
+    color: $dfn-hover;
+    text-decoration: underline $dfn-hover;
+}
+
 figure:not(.code) img,
 figure:not(.code) img.img-center {
     margin-bottom: 0.4rem;
@@ -50,16 +61,6 @@ figcaption.title {
     font-weight: bold;
 }
 
-dfn {
-    text-decoration: underline;
-    font-weight: 500;
-    cursor: help;
-}
-
-dfn:hover {
-    color: $dfn-hover;
-    text-decoration: underline $dfn-hover;
-}
 
 .img-center {
     display: block;
@@ -69,6 +70,10 @@ dfn:hover {
 .img-border {
     padding: 4px;
     border: 1px solid #aaa;
+}
+
+.img-full {
+    max-width: 100%;
 }
 
 a {

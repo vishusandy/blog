@@ -12,9 +12,7 @@
                 <a href="{% if link.static_url %}{{ link.url | safe }}{% else %}{{ get_url(path=link.url) | safe }}{% endif %}"
                     {%- if link.attribues %} {{ link.attribues | safe }}{% endif -%}
                     {%- if link.new_window %} target="_blank" rel="noreferrer noopener"{% endif -%}
-                >
-                    {{ link.text | safe }}
-                </a>
+                >{{ link.text | safe }}</a>
             </li>
             {% endfor %}
         </ul>
