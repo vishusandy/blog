@@ -31,7 +31,7 @@ At least on Linux it's not too hard to automate this setup.
 1. Download [install_blender.sh](../assets/blender_python/install_blender.sh)
 2. Open a terminal to the directory where you downloaded the `install_blender.sh` script
 3. Make the script executable
-    ```shell
+    ```bash
     chmod +x install_blender.sh
     ```
 
@@ -46,14 +46,14 @@ At least on Linux it's not too hard to automate this setup.
     </ol>
     </details>
 
-    ```shell
+    ```bash
     BLENDER_URL=https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
     BLENDER_INSTALL=$HOME/bin/blender/
     ```
 
 5. Run the `install_blender.sh` script
     
-    ```shell
+    ```bash
     ./install_blender.sh
     ```
     
@@ -72,7 +72,7 @@ After adding the lines to your `.bashrc` file that were suggested by the install
 
 1. You can install any module but as an example I will use <a href="https://pillow.readthedocs.io/en/stable/" target="_blank" rel="noreferrer noopener">Pillow</a>:
 
-    ```shell
+    ```bash
     "$BPY" -m pip install --upgrade pillow
     ```
 
