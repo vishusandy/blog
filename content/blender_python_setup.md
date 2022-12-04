@@ -98,7 +98,7 @@ After adding the lines to your `.bashrc` file that were suggested by the install
 
 3. In Blender's Python console type:
     
-    ```
+    ```python
     import PIL
     ```
     
