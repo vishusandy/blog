@@ -1,7 +1,7 @@
 +++
 title = "Blender Python Setup on Linux"
 date = 2022-12-03
-description = "I thought setting up Blender for python programming would be easy.  I was wrong."
+description = "I thought setting up Blender for python programming would be easy.  I was wrong - it took way too long to figure out how to make everything work.  This is more of a reminder to myself but hopefully others can find it useful as well."
 +++
 
 ## Blender & Python
@@ -22,7 +22,7 @@ Since this needs to be done every time you want to upgrade to a new version of B
 - finds the path for Blender Python (no more digging around for it)
 - sets up and installs the `blender.desktop` file (so you have a nice little shortcut for it)
 - ensures `pip` is installed
-- tells you what to add to your `.bashrc` file so you can always find Blender and Blender's Python
+- tells you what to add to your `.bashrc` file so you can always find Blender and its Python version
 
 ## Installing
 
