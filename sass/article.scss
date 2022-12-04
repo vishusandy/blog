@@ -23,7 +23,11 @@ h1.title {
     font-size: 1rem;
 }
 
-
+h2,
+h3,
+h4 {
+    margin-top: 1rem;
+}
 
 .zola-anchor {
     font-size: 50%;
@@ -46,6 +50,10 @@ dfn:hover {
 figure:not(.code) img,
 figure:not(.code) img.img-center {
     margin-bottom: 0.4rem;
+}
+
+figure {
+    margin-bottom: 3rem;
 }
 
 figcaption {
