@@ -12,12 +12,11 @@
         {% block css %} {% endblock css %}
         {% block js %} {% endblock js %}
     </head>
-    <body>
+    <body id="top">
         {{ macros::header() }}
-        
         {% block page_title %} {% endblock %}
+        {% block toc %} {% endblock%}
         <div class="container">
-            {% block toc %} {% endblock%}
             <section class="section">
                 {% block content %} {% endblock %}
             </section>
