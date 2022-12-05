@@ -27,6 +27,7 @@ header {
     justify-content: space-between;
     margin: 0 auto 3rem;
     padding-top: .6rem;
+    padding-bottom: 8px;
     top: 0px;
     background: #fff;
 }
@@ -42,7 +43,10 @@ header .title {
 
 #top-link.shown {
     opacity: 1;
-    transition: opacity 1.5s ease-out;
+}
+
+#top-link.show_anim {
+    transition: opacity 1.0s ease-out;
 }
 
 header .links {
