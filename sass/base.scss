@@ -1,7 +1,11 @@
-$font-stack: Georgia, Palatino, "Palatino Linotype", "Times New Roman", "DejaVu Serif", serif, "Apple Color Emoji", "Segoe UI Emoji";
+:root {
+    --default-fonts: Georgia, Palatino, "Palatino Linotype", "Times New Roman", "DejaVu Serif", serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --title-fonts: Trebuchet, Tahoma, Arial, sans-serif;
+    --system-fonts: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 body {
-    font-family: $font-stack;
+    font-family: var(--default-fonts);
     color: #282828;
     max-width: 850px;
     margin: 0 auto;
@@ -63,10 +67,10 @@ header .links .link-icon {
 }
 
 .subtitle {
+    font-family: var(--system-fonts);
     margin-top: 0px;
     margin-bottom: 2rem;
     padding-left: 0em;
-    // font-size: 1.3rem;
     color: #55565c;
     text-align: center;
 }
@@ -74,6 +78,14 @@ header .links .link-icon {
 .subtitle div.created,
 .subtitle div.updated {
     display: block;
+}
+
+.subtitle .no-update {
+    font-size: 1.2rem;
+}
+
+.subtitle .updated {
+    font-size: 1rem;
 }
 
 .subtitle a {
