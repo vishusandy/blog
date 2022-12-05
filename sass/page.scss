@@ -1,8 +1,8 @@
-.section h2,
-.section h3,
-.section h4,
-.section h5,
-.section h6 {
+section.section h2,
+section.section h3,
+section.section h4,
+section.section h5,
+section.section h6 {
     margin-top: 1rem;
 }
 
@@ -21,10 +21,6 @@ ul {
 
 li {
     margin-bottom: .4rem;
-}
-
-details summary {
-    list-style-position: outside;
 }
 
 details h2 {

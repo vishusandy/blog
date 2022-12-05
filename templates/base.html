@@ -11,6 +11,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% block css %} {% endblock css %}
         {% block js %} {% endblock js %}
+        {{ macros::toplink_script() }}
     </head>
     <body id="top">
         {{ macros::header() }}

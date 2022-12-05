@@ -31,21 +31,29 @@ external_links_no_follow = true
 external_links_no_referrer = true
 
 [extra]
-katex_enable = true
-katex_auto_render = true
+katex_enable = true      # include files for rendering math content
+katex_auto_render = true # automatically render math content
+enable_top_link = true   # if true show a link to the top of the page in the header
 
 [[extra.links]]
 text = "Links"
 url = "/pages/links"
+static_url = false   # if true the url is not a local markdown file
+new_window = false
 
 [[extra.links]]
-text = "<i class=\"link-icon fa-brands fa-github\" alt=\"My GitHub profile\" title=\"My GitGub\"></i>"
+text = "<i class=\"link-icon fa-brands fa-github\" alt=\"Go to my GitHub profile\" title=\"My GitGub\"></i>"
 url = "https://github.com/vishusandy"
+# if true the url is not a local markdown file
 static_url = true
 new_window = true
 
 [[extra.links]]
-text = "<i class=\"link-icon fa-brands fa-mastodon\"></i>"
+text = "<i class=\"link-icon fa-brands fa-mastodon\" alt=\"Go to my Mastodon profile\" title=\"My Mastodon profile\"></i>"
 url = "https://social.linux.pizza/@vishus"
+# if true the url is not a local markdown file
 static_url = true
-attribues = "rel=\"me\" target=\"_blank\""
+# new window will be default override the rel attribute
+new_window = false
+# extra attributes - add the rel="me" for mastodon
+attribues = "target=\"_blank\" rel=\"me noreferrer noopener\""
