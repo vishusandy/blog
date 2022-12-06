@@ -1,6 +1,7 @@
 +++
 title = "Blender Python Setup on Linux"
 date = 2022-12-03
+updated = 2022-12-06
 description = "I thought setting up Blender for python programming would be easy.  I was wrong - it took way too long to figure out how to make everything work.  This is more of a reminder to myself but hopefully others can find it useful as well."
 +++
 
@@ -37,6 +38,9 @@ At least on Linux it's not too hard to automate this setup.
 
 4. Specify the version to install and where to install it 
     <details><summary>Find download link</summary>
+    
+    To find the url for the blender `.tar.xz` archive:
+    
     <ol>
     <li>Go to <a href="https://www.blender.org/about/website/" target="_blank" rel="noreferrer noopener">Blender.org > About > Website</a></li>
     <li>Choose a mirror under the section titled <b>External Mirrors</b></li>
@@ -113,7 +117,26 @@ After adding the lines to your `.bashrc` file that were suggested by the install
 
 ## Importing local Python files
 
-Frustratingly, Blender's python will not automatically resolve imports for local files.  To get around this I add the following to the top of the file I will be executing in Blender:
+Frustratingly, Blender's python will not automatically resolve imports for local files.  To get around this I append the `.blend` file's path to `sys.path`.
+
+<details open="true">
+<summary>To <b>automatically</b> add the current file's path</summary>
+
+1. Download [import_cur_path.py](../assets/blender_python/import_cur_path.py) 
+2. Copy it to your `scripts/startup` folder
+
+Or run this to download the file directly to your `scripts/startup/` folder: 
+
+```bash
+curl -o "$BLENDER_PATH/$BLENDER_VERSION/scripts/startup/import_cur_path.py" "{{ get_path(path='assets/blender_python/import_cur_path.py') }}"
+```
+
+</details>
+
+<details>
+    <summary>Or <b>manually</b></summary>
+    
+Paste the following into your python console:
 
 ```python
 import sys
@@ -123,6 +146,9 @@ dir = os.path.dirname(bpy.data.filepath)
 if not dir in sys.path:
     sys.path.append(dir)
 ```
+
+</details>
+
 
 Now you can import python scripts from the folder where your `.blend` file is saved.
 
