@@ -1,3 +1,5 @@
+@import 'vars.scss';
+
 article {
     min-width: 200px;
     line-height: 1.5;
@@ -34,8 +36,8 @@ dfn {
 }
 
 dfn:hover {
-    color: #504545;
-    text-decoration: underline #504545;
+    color: $dfn-hover-color;
+    text-decoration: underline $dfn-hover-color;
 }
 
 figure:not(.code) img,
@@ -48,14 +50,14 @@ figure {
 }
 
 figcaption {
-    color: #4c4e52;
+    color: $figure-caption-color;
     text-align: center;
     width: 70%;
     margin: 0px auto;
 }
 
 figcaption.title {
-    color: #282828;
+    color: $figure-title-color;
     font-size: 1.1rem;
     font-weight: bold;
 }
@@ -71,14 +73,9 @@ figure img {
 
 .img-border {
     padding: 4px;
-    border: 1px solid #aaa;
+    border: 1px solid $img-border-color;
 }
 
 .img-full {
     max-width: 100%;
-}
-
-a {
-    color: #212121;
-    text-decoration: underline;
 }
