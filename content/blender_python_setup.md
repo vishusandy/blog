@@ -2,14 +2,8 @@
 title = "Blender Python Setup on Linux"
 date = 2022-12-03
 updated = 2022-12-06
-description = "I thought setting up Blender for python programming would be easy.  I was wrong - it took way too long to figure out how to make everything work.  This is more of a reminder to myself but hopefully others can find it useful as well."
+description = "Using Blender with Python introduces some very cool possibilities; unfortunately I found it very hard to get started.  This is more of a reminder to self, but hopefully it's useful to others as well."
 +++
-
-## Blender & Python
-
-For anyone using Blender you will probably know it uses Python, which can interact with Blender to control objects, manipulate meshes, and more.
-
-I personally like using it to play around with algorithms and generate meshes.  I will post more about this later, but for now let's focus on getting the environment setup for this.
 
 ## Installation script
 
@@ -25,9 +19,13 @@ Since this needs to be done every time you want to upgrade to a new version of B
 - ensures `pip` is installed
 - tells you what to add to your `.bashrc` file so you can always find Blender and its Python version
 
-## Installing
 
+
+## Installing
+<details open="open">
+<summary>
 At least on Linux it's not too hard to automate this setup.
+</summary>
 
 1. Download [install_blender.sh](../assets/blender_python/install_blender.sh)
 2. Open a terminal to the directory where you downloaded the `install_blender.sh` script
@@ -64,43 +62,44 @@ At least on Linux it's not too hard to automate this setup.
     I got this error, but it still works:
 
     <figure>
-        <a href="../assets/blender_python/blender_python_setup_errors.png" target="_blank">
+        <a href="../assets/blender_python/blender_python_setup_errors.png">
             <img class="img-full" title="Installation error message" src="../assets/blender_python/blender_python_setup_errors.png" alt="Error encountered: pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts." class="img-center">
         </a>
         <figcaption>I had an error message, but everything still works - it still says `Successfully installed pip`</figcaption>
     </figure>
+</details>
 
-### Testing it out
 
-After adding the lines to your `.bashrc` file that were suggested by the install script, open a new terminal.
+## Testing it out
+<details open="open">
+<summary>Let's make sure it worked</summary>
 
-1. You can install any module but as an example I will use <a href="https://pillow.readthedocs.io/en/stable/" target="_blank" rel="noreferrer noopener">Pillow</a>:
+
+1. After adding the lines to your `.bashrc` file that were suggested by the install script, open a new terminal
+
+2. You can install any module but as an example I will use <a href="https://pillow.readthedocs.io/en/stable/" target="_blank" rel="noreferrer noopener">Pillow</a>:
 
     ```bash
     "$BPY" -m pip install --upgrade pillow
     ```
 
-    <details>
-    <summary>
-    Just as with the installation I received an error - but it still works just fine
-    </summary>
+    Note: got another error here but it still works
     <figure>
-        <a href="../assets/blender_python/scripting_layout.png" target="_blank">
+        <a href="../assets/blender_python/scripting_layout.png">
             <img class="img-full img-center" title="Pillow installation error" src="../assets/blender_python/blender_python_pillow.png" alt="Error encountered: pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts.">
         </a>
         <figcaption>I ignored this</figcaption>
     </figure>
-    </details>
 
-2. Open blender and click the `Scripting` workspace
+3. Open blender and click the `Scripting` workspace
 
     <figure>
-        <a href="../assets/blender_python/scripting_layout.png" target="_blank">
+        <a href="../assets/blender_python/scripting_layout.png">
             <img class="img-full img-center" title="Blender scripting layout" src="../assets/blender_python/scripting_layout.png" alt="Blender's scripting layout is located at the top of the screen towards the center">
         </a>
     </figure>
 
-3. In Blender's Python console type:
+4. In Blender's Python console type:
     
     ```python
     import PIL
@@ -114,8 +113,10 @@ After adding the lines to your `.bashrc` file that were suggested by the install
         </a>
     </figure>
 
+</details>
 
 ## Importing local Python files
+
 
 Frustratingly, Blender's python will not automatically resolve imports for local files.  To get around this I append the `.blend` file's path to `sys.path`.
 
@@ -157,3 +158,4 @@ For example, if you had a python file called `zebra.py`, in the same directory a
 ```python
 import zebra
 ```
+
