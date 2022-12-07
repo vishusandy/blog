@@ -17,10 +17,16 @@ section.section h6 {
 
 ul {
     margin-top: .3rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.4rem;
 }
 
 li {
     margin-bottom: .4rem;
+}
+
+li ul {
+    margin-top: 1rem;
 }
 
 details h2 {
@@ -28,7 +34,11 @@ details h2 {
 }
 
 details {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+details summary h2 {
+    font-size: 1.7rem;
 }
 
 

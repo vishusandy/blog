@@ -22,6 +22,7 @@ h1.title {
 }
 
 header {
+    z-index: 999;
     position: sticky;
     display: flex;
     justify-content: space-between;
@@ -30,6 +31,7 @@ header {
     padding-bottom: 8px;
     top: 0px;
     background: #fff;
+    height: 2.5rem;
 }
 
 header .title {
@@ -197,6 +199,8 @@ div.toc p {
 }
 
 div.toc>ul {
+    font-family: var(--title-fonts);
+    line-height: 1.6rem;
     margin-top: .3rem;
     margin-bottom: .3rem;
     padding: 0px 1rem 0px 2rem;
@@ -215,24 +219,65 @@ details figure {
     margin-bottom: 0px;
 }
 
-details summary {
+details>summary {
     cursor: pointer;
-    font-size: 110%;
-    border-bottom: 1px solid #f0eee8;
-    background-color: #f8f7f4;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    margin-left: -.5rem;
-    margin-right: -.5rem;
-    margin-bottom: -1px;
-    margin-top: -.5rem;
+    // background-color: #f0eadb;
+    // background-color: #f2f2f4;
+    border-collapse: collapse;
+    padding: .4rem 1rem .4rem 1rem;
+    font-family: var(--title-fonts);
+    font-size: 1.2rem;
+    margin: -1rem -1rem -.4rem -1rem;
+
+}
+
+details[open]>summary {
+    // font-size: 1.1rem;
+    background-color: #ececf0;
+    border: 1px solid #b4b1ac;
+    position: sticky;
+    top: calc(3.5rem + 2px);
+    // z-index: -999;
+    // background-color: #ebe8e1;
+    border-bottom: 1px solid #b4b1ac;
+    margin-bottom: 1rem;
+    margin: calc(-1rem - 1px) calc(-1rem - 1px) .7rem calc(-1rem - 1px);
+}
+
+details[open] {
+    padding-bottom: .1rem;
+    background-color: #fbfbfb;
+    border: 1px solid #b4b1ac;
+}
+
+details details summary {
+    position: static !important;
 }
 
 details {
-    border: 1px solid #f0eee8;
-    background-color: #fffefb;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: .5rem .5rem 0px .5rem;
+    // background-color: #fdfcf7;
+    padding: 1rem 1rem .4rem 1rem;
+    margin: .5rem 1rem 1.5rem;
+}
+
+details summary::marker {
+    font-size: 1.3rem;
+}
+
+details h1,
+details h2,
+details h3,
+details h4,
+details h5,
+details h6 {
+    display: inline;
+}
+
+details h1 .zola-anchor,
+details h2 .zola-anchor,
+details h3 .zola-anchor,
+details h4 .zola-anchor,
+details h5 .zola-anchor,
+details h6 .zola-anchor {
+    display: none;
 }

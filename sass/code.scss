@@ -4,9 +4,7 @@
  */
 
 
-
-@mixin codefence-lang($lang) {
-    content: $lang;
+pre[data-lang] code::before {
     margin: calc(-1.2rem - 1px) calc(-1.2rem - 1px) 0px auto;
     display: block;
     text-align: right;
@@ -14,13 +12,17 @@
     background-color: #878a8c;
     float: right;
     padding: 2px 1rem 3px 1rem;
-    // font-family: $fencelabel-stack;
     font-family: var(--title-fonts);
-    // text-shadow: 1px 1px 2px #aaaaaa;
     color: #eee;
+
+}
+
+@mixin codefence-lang($lang) {
+    content: $lang;
 }
 
 
+// Inline code blocks
 code:not([data-lang]) {
     background-color: rgba(27, 31, 35, .09);
     border-radius: 3px;
@@ -35,6 +37,12 @@ code:not([data-lang]) {
         monospace;
 }
 
+pre[style] {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+// Code blocks
 pre[style] code {
     display: block;
     color: #000;
@@ -45,7 +53,6 @@ pre[style] code {
     margin-left: 0rem;
     margin-right: 0rem;
     margin-bottom: 1rem;
-    // text-shadow: 0 1px white;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', 'DejaVu Sans Mono', monospace;
     tab-size: 4;
     font-size: 1rem;
