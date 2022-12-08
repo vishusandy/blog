@@ -19,7 +19,14 @@ $subtitle-link: #4c4d52;
 
 $details-header: #ececf0;
 $details-border: #b4b1ac;
-$details-bg: #fbfbfb;
+// $details-bg: #fbfbfb;
+$details-bg: #f7f7f7;
+$details-hidden-summary-font-color: $font-color;
+$details-shown-summary-font-color: #4b4b4b;
+$details-arrow-to-open: #b4b1ac;
+$details-arrow-to-open-hover: #524e4a;
+$details-arrow-to-close: #b4b1ac;
+$details-arrow-to-close-hover: #524e4a;
 
 $figure-title-color: #282828;
 $figure-caption-color: #4c4e52;
