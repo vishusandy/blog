@@ -17,7 +17,7 @@ Since this needs to be done every time you want to upgrade to a new version of B
 - finds the path for Blender Python (no more digging around for it)
 - sets up and installs the `blender.desktop` file (so you have a nice little shortcut for it)
 - ensures `pip` is installed
-- tells you what to add to your `.bashrc` file so you can always find Blender and its Python version
+- appends `BPY`, `BLENDER_PATH`, and `BLENDER_VERSION` to your `.bashrc` file so you can easily find Blender
 
 
 
@@ -41,7 +41,7 @@ At least on Linux it's not too hard to automate this setup.
     
     <ol>
     <li>Go to <a href="https://www.blender.org/about/website/" target="_blank" rel="noreferrer noopener">Blender.org > About > Website</a></li>
-    <li>Choose a mirror under the section titled <b>External Mirrors</b></li>
+    <li>Choose a mirror from the section titled <b>External Mirrors</b></li>
     <li>Choose the <b>release</b> folder</li>
     <li>Choose the folder with the latest version</li>
     <li>Copy the link for the file ending with <code>-linux-x64.tar.xz</code></li>
@@ -49,8 +49,8 @@ At least on Linux it's not too hard to automate this setup.
     </details>
 
     ```bash
-    BLENDER_URL=https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
-    BLENDER_INSTALL=$HOME/bin/blender/
+    export BLENDER_URL=https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+    export BLENDER_INSTALL=$HOME/bin/blender/
     ```
 
 5. Run the `install_blender.sh` script
