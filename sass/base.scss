@@ -1,4 +1,6 @@
 @import 'vars.scss';
+@import 'details.scss';
+@import 'toc.scss';
 
 body {
     font-family: var(--default-fonts);
@@ -84,23 +86,6 @@ footer ul {
     gap: 1rem;
 }
 
-// footer ul li {
-//     flex-grow: 1;
-//     // margin: 0px auto;
-// }
-
-// footer ul li {
-//     text-align: center;
-// }
-
-// footer ul li:first-of-type {
-//     text-align: left;
-// }
-
-// footer ul li:last-of-type {
-//     text-align: right;
-// }
-
 .subtitle {
     font-family: var(--system-fonts);
     margin-top: 0px;
@@ -161,170 +146,10 @@ h6 {
     margin: .3rem 0px .5rem;
 }
 
-section.toc {
-    background-color: $toc-bg;
-    padding: .5rem;
-    margin: 2rem auto 2rem;
-    border-radius: 9px;
-    width: fit-content;
-    border: 1px solid $toc-border;
-}
-
-div.toc {
-    margin: 1rem 2rem;
-    line-height: 1.2rem;
-}
-
-div.toc h5 {
-    padding: 0px 1rem;
-    text-align: center;
-    margin-bottom: .3rem;
-    font-size: 1.3rem;
-    font-weight: normal;
-}
-
-div.toc div.top {
-    text-align: center;
-}
-
-div.toc hr {
-    height: 1px;
-    border: 0px;
-    background: $toc-hr-bg;
-    margin: 0px auto .6rem;
-    width: 65%;
-}
-
-
-div.toc p {
-    margin-top: 0;
-    margin-bottom: 0.2rem;
-}
-
-div.toc>ul {
-    font-family: var(--title-fonts);
-    line-height: 1.6rem;
-    margin-top: .3rem;
-    margin-bottom: .3rem;
-    padding: 0px 1rem 0px 2rem;
-}
-
-div.toc li {
-    margin-bottom: .3rem;
-}
 
 a {
     color: $a-color;
     text-decoration: underline;
-}
-
-details figure {
-    margin-bottom: 0px;
-}
-
-details>summary {
-    cursor: pointer;
-    border-collapse: collapse;
-    padding: .4rem 1rem .4rem 1rem;
-    font-family: var(--title-fonts);
-    font-size: 1.2rem;
-    list-style-type: none;
-    margin: -1rem -1rem -.4rem -1rem;
-    color: $details-hidden-summary-font-color;
-    font-weight: 600;
-    color: $details-shown-summary-font-color;
-}
-
-details>summary:hover {
-    background-color: $details-header;
-    border: 1px solid $details-border;
-    border-radius: 11px;
-    // margin-bottom: -8.5px;
-    margin-bottom: calc(-.4rem - 2px);
-    color: $details-shown-summary-font-color;
-}
-
-details>summary::before {
-    content: "\f063 ";
-    font: var(--fa-font-solid);
-    color: $details-arrow-to-open;
-    margin-right: .5rem;
-}
-
-details>summary:hover::before {
-    content: "\f063 ";
-    font: var(--fa-font-solid);
-    color: $details-arrow-to-open-hover;
-    margin-right: .5rem;
-}
-
-details[open]>summary::before {
-    content: "\f062 ";
-    font: var(--fa-font-solid);
-    color: $details-arrow-to-close;
-    margin-right: .5rem;
-}
-
-details[open]>summary:hover::before {
-    content: "\f062 ";
-    font: var(--fa-font-solid);
-    color: $details-arrow-to-close-hover;
-    margin-right: .5rem;
-}
-
-
-details[open]>summary {
-    background-color: $details-header;
-    border: 1px solid $details-border;
-    border-radius: 11px;
-    position: sticky;
-    top: calc(3.5rem + 1px);
-    border-bottom: 1px solid $details-border;
-    border-top: 1px solid $details-border;
-    margin: calc(-1rem - 1px) calc(-1rem - 1px) .7rem calc(-1rem - 1px);
-    z-index: 99;
-    color: $details-shown-summary-font-color;
-
-}
-
-
-details[open] {
-    padding-bottom: .1rem;
-    background-color: $details-bg;
-    // border: 1px solid $details-border;
-}
-
-details details summary {
-    position: static !important;
-}
-
-details {
-    padding: 1rem 1rem .4rem 1rem;
-    margin: 2.5rem 0px 1.5rem;
-}
-
-@media only screen and (min-width: $min-body-size) {
-    details {
-        margin: 2.5rem 1rem 1.5rem;
-    }
-}
-
-details h1,
-details h2,
-details h3,
-details h4,
-details h5,
-details h6 {
-    display: inline;
-}
-
-details h1 .zola-anchor,
-details h2 .zola-anchor,
-details h3 .zola-anchor,
-details h4 .zola-anchor,
-details h5 .zola-anchor,
-details h6 .zola-anchor {
-    display: none;
 }
 
 .zola-anchor {
