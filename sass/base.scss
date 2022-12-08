@@ -22,6 +22,8 @@ header {
     position: sticky;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     margin: 0 auto 3rem;
     padding-top: .6rem;
     padding-bottom: .5rem;
@@ -67,6 +69,37 @@ header .links li {
 header .links .link-icon {
     font-size: 2rem;
 }
+
+footer {
+    margin-top: 10rem;
+    text-align: center;
+}
+
+footer ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+// footer ul li {
+//     flex-grow: 1;
+//     // margin: 0px auto;
+// }
+
+// footer ul li {
+//     text-align: center;
+// }
+
+// footer ul li:first-of-type {
+//     text-align: left;
+// }
+
+// footer ul li:last-of-type {
+//     text-align: right;
+// }
 
 .subtitle {
     font-family: var(--system-fonts);
