@@ -16,8 +16,22 @@ updated = 2022-12-01
 - [GitHub](https://github.com/vishusandy)
 - [Instagram](https://www.instagram.com/vishusandy/)
 - [Mastodon](https://social.linux.pizza/@vishus)
+    
+</details>
+
+<details open="true">
+
+<summary>
+<h2>My Git Repos</h2>
+</summary>
+
+- [3d mazes](https://github.com/vishusandy/3d_mazes)
+- [My Starship theme](https://github.com/vishusandy/absolutely_vishus)
+- [My blog theme](https://github.com/vishusandy/vishus_zola)
+- [My dotfiles](https://github.com/vishusandy/dotfiles)
 
 </details>
+
 
 
 <details open="true">
@@ -107,6 +121,5 @@ updated = 2022-12-01
 </summary>
 
 - [Big list of naughty strings](https://github.com/minimaxir/big-list-of-naughty-strings) - "an evolving list of strings which have a high probability of causing issues when used as user-input data"
-- [Firefox Monitor](https://monitor.firefox.com/)
 
 </details>
