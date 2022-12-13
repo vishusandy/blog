@@ -66,6 +66,20 @@ figure img {
     max-width: 100%;
 }
 
+figure video {
+    display: block;
+    margin-bottom: 0.8rem;
+    // margin-top: 0.2rem;
+}
+
+figure video {
+    max-width: 100%;
+}
+
+figure video.full {
+    width: 100%;
+}
+
 .img-center {
     display: block;
     margin: 0.2rem auto 2rem;
