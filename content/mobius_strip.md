@@ -41,7 +41,7 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
 ### Steps
 
 <ol>
-    <li id="step-1">Create 4 vertices.  The width between the vertices is the `thickness` (distance between front and back sides) and the height is the `minor_radius` (how tall it should be).
+    <li id="step-1">Create 4 vertices.  The width between the vertices is the <code>thickness</code> (distance between front and back sides) and the height is the <code>minor_radius</code> (how tall it should be).
         <figure>
         <figcaption class="title"><h5>Front view</h5></figcaption>
         <a href="../assets/mobius_strip/verts_centered.png">
@@ -59,7 +59,7 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
         <figcaption>Rotate around minor axis</figcaption>
         </figure>
     </li>
-    <li id="step-3">Move the vertices `major_radius` away from the center
+    <li id="step-3">Move the vertices <code>major_radius</code> away from the center
         <figure>
         <figcaption class="title"><h5>Front view</h5></figcaption>
         <a href="../assets/mobius_strip/step3_move_vertices.webp">
