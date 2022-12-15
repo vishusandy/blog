@@ -30,8 +30,8 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
 
 <figure>
 <figcaption class="title"><h5>Front view</h5></figcaption>
-<a href="../assets/mobius_strip/axes.png">
-<img title="Major and minor axes" src="../assets/mobius_strip/axes.png" alt="From a top view: the major axis shown as a line from the center to outside of a circle; the minor axis is shown as a line across the width of the circle" class="img-center">
+<a href="../assets/mobius_strip/axes_thickness.png">
+<img title="Major and minor axes" src="../assets/mobius_strip/axes_thickness.png" alt="From a top view: the major axis shown as a line from the center to outside of a circle; the minor axis is shown as a line across the width of the circle" class="img-center">
 </a>
 <figcaption>The vertices form a rectangle</figcaption>
 </figure>
@@ -53,8 +53,8 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
     <li id="step-2">Rotate those vertices around the minor axis
         <figure>
         <figcaption class="title"><h5>Front view</h5></figcaption>
-        <a href="../assets/mobius_strip/verts_rotate_minor_axis.gif">
-        <img title="Rotate around the minor axes" src="../assets/mobius_strip/verts_rotate_minor_axis.gif" alt="Viewed from the front: rotating the 4 vertices around the minor axis" class="img-center">
+        <a href="../assets/mobius_strip/step2_rotate_minor_axis.webp">
+        <img title="Rotate around the minor axes" src="../assets/mobius_strip/step2_rotate_minor_axis.webp" alt="Viewed from the front: rotating the 4 vertices around the minor axis" class="img-center">
         </a>
         <figcaption>Rotate around minor axis</figcaption>
         </figure>
@@ -62,8 +62,8 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
     <li id="step-3">Move the vertices `major_radius` away from the center
         <figure>
         <figcaption class="title"><h5>Front view</h5></figcaption>
-        <a href="../assets/mobius_strip/verts_move.gif">
-        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/verts_move.gif" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
+        <a href="../assets/mobius_strip/step3_move_vertices.webp">
+        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/step3_move_vertices.webp" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
         </a>
         <figcaption>Rotate around minor axis</figcaption>
         </figure>
@@ -71,8 +71,8 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
     <li id="step-4">Rotate the vertices around the major axis
         <figure>
         <figcaption class="title"><h5>Top view</h5></figcaption>
-        <a href="../assets/mobius_strip/verts_rotate_major_axis.gif">
-        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/verts_rotate_major_axis.gif" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
+        <a href="../assets/mobius_strip/step4_rotate_major_axis.webp">
+        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/step4_rotate_major_axis.webp" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
         </a>
         <figcaption>Rotate around major axis</figcaption>
         </figure>
@@ -80,12 +80,12 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
 </ol>
 
 
-Here is the final placement of vertices after each loop iteration:
+Here are the vertices after each loop iteration:
 
 <figure>
 <figcaption class="title"><h5>Top view</h5></figcaption>
-<a href="../assets/mobius_strip/verts_adding.gif">
-<img title="Loop iteration" src="../assets/mobius_strip/verts_adding.gif" alt="Viewed from the top: vertices appearing in each iteration after having been moved and rotated" class="img-center">
+<a href="../assets/mobius_strip/add.webp">
+<img title="Loop iteration" src="../assets/mobius_strip/add.webp" alt="Viewed from the top: vertices appearing in each iteration after having been moved and rotated" class="img-center">
 </a>
 <figcaption>First half of the loop</figcaption>
 </figure>
@@ -103,7 +103,6 @@ Then we just repeat this for the rest of the loop and we will have placed all of
 
 
 ## Python Code
-
 
 We will be using Blender's [Mathutils](https://docs.blender.org/api/current/mathutils.html) module - specifically the [Vector](https://docs.blender.org/api/current/mathutils.html#mathutils.Vector) and [Matrix](https://docs.blender.org/api/current/mathutils.html#mathutils.Matrix) types.  Vector will be used to store 3d coordinates and Matrix will be used to rotate the coordinates.
 
