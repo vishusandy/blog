@@ -1,7 +1,11 @@
 @import 'vars.scss';
 
-article {
+body p {
+    line-height: 1.5;
     min-width: 200px;
+}
+
+article {
     line-height: 1.5;
     // padding-bottom: 5rem;
 }
