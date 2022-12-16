@@ -2,7 +2,7 @@
 title = "3d Mobius Strip"
 date = 2022-12-13
 updated = 2022-12-15
-description = "The purpose of this article to clearly explain how to create a Mobius Strip in Blender using Python.  Technically it's a Mobius Ring since it is a 3d object, but I'll refer to it as a Mobius Strip since that will be a more familiar term for most people.  The goal here is not to explain terminology but to explain the process and give a clear understanding of how the code works and why."
+description = "The purpose of this article to clearly explain how to create a Mobius Strip in Blender using Python.  Technically it's a Mobius Ring since it is a 3d object, but I'll refer to it as a Mobius Strip since that will be a more familiar term for most people.  The goal here is to create a clear and easy to follow explanation of how to create a Mobius Strip in Blender using Python."
 +++
 
 <figure>
@@ -14,8 +14,6 @@ description = "The purpose of this article to clearly explain how to create a Mo
 
 
 ## Getting started
-
-
 
 First I'll describe the steps needed to make a 3d mobius strip then we'll implement those steps in Python code.
 
