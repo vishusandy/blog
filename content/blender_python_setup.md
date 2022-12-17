@@ -59,14 +59,15 @@ At least on Linux it's not too hard to automate this setup.
     ./install_blender.sh
     ```
     
-    I got this error, but it still works:
-
-    <figure>
-        <a href="../assets/blender_python/blender_python_setup_errors.png">
-            <img class="img-full" title="Installation error message" src="../assets/blender_python/blender_python_setup_errors.png" alt="Error encountered: pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts." class="img-center">
-        </a>
-        <figcaption>I had an error message, but everything still works - it still says `Successfully installed pip`</figcaption>
-    </figure>
+    > I got this error, but it still works:
+        {{
+            img(
+                url="../assets/blender_python/blender_python_setup_errors.png"
+                title="Installation error message"
+                alt="Error encountered: pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts."
+                caption="Everything still works - <code>Successfully installed pip</code>"
+            )
+        }}
 </details>
 
 
@@ -84,20 +85,24 @@ At least on Linux it's not too hard to automate this setup.
     ```
 
     Note: got another error here but it still works
-    <figure>
-        <a href="../assets/blender_python/blender_python_pillow.png">
-            <img class="img-full img-center" title="Pillow installation error" src="../assets/blender_python/blender_python_pillow.png" alt="Error encountered: pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts.">
-        </a>
-        <figcaption>I ignored this</figcaption>
-    </figure>
+    
+    {{
+    img(
+        url="../assets/blender_python/blender_python_pillow.png"
+        title="Pillow installation error"
+        alt="Error encountered: 'pip's dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts.'"
+        caption="Ignore this message"
+    )
+}}
 
 3. Open blender and click the `Scripting` workspace
-
-    <figure>
-        <a href="../assets/blender_python/scripting_layout.png">
-            <img class="img-full img-center" title="Blender scripting layout" src="../assets/blender_python/scripting_layout.png" alt="Blender's scripting layout is located at the top of the screen towards the center">
-        </a>
-    </figure>
+    {{
+        img(
+            url="../assets/blender_python/scripting_layout.png"
+            title="Blender scripting layout"
+            alt="Blender's scripting layout is located at the top of the screen towards the center"
+        )
+    }}
 
 4. In Blender's Python console type:
     
@@ -106,12 +111,13 @@ At least on Linux it's not too hard to automate this setup.
     ```
     
     It should just import the module without any errors.
-    
-    <figure>
-        <a href="../assets/blender_python/import_pillow.png" target="_blank">
-            <img class="img-full img-center" title="Blender python console with Pillow imported" src="../assets/blender_python/import_pillow.png" alt="Blender python console showing `import PIL` with no errors">
-        </a>
-    </figure>
+    {{
+        img(
+            url="../assets/blender_python/import_pillow.png"
+            title="Blender python console with Pillow imported"
+            alt="Blender python console showing `import PIL` with no errors"
+        )
+    }}
 
 </details>
 
