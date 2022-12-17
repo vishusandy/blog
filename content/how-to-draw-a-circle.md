@@ -46,10 +46,15 @@ So the actual point is (5, 8.66) but we need a whole number to put it onto an im
 
 As an example consider the following image:
 
-<figure>
-    <img title="Pixel locations vs circle coordinates" src="../assets/draw-a-circle/pixel_coordinates.png" alt="Grid showing how points in a circle land somewhere between two pixels" class="img-center">
-    <figcaption>The grid lines represent exact integer coordinates.  The coordinates in the circle are floating-points numbers so the actual points usually lie somewhere between two pixels.</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/draw-a-circle/pixel_coordinates.png"
+        title="Pixel locations vs circle coordinates"
+        alt="Grid showing how points in a circle land somewhere between two pixels"
+        caption="The grid lines represent exact integer coordinates.  The coordinates in the circle are floating-points numbers so the actual points usually lie somewhere between two pixels."
+        title_caption="Pixel coordinates"
+    )
+}}
 
 ### Solving for `y`
 
@@ -84,17 +89,28 @@ img.save("naive_circle_attempt.png")
 
 <p>The above code produces:</p>
 
-<figure>
-    <img title="Circle attempt" src='../assets/draw-a-circle/naive_circle_attempt.png' alt="A circle with vertical gaps between pixels on the left and right sides" class="img-center img-border">
-    <figcaption>Notice the vertical gaps between pixels on the left and right sides</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/draw-a-circle/naive_circle_attempt.png"
+        title="Circle attempt"
+        alt="A circle with vertical gaps between pixels on the left and right sides" class="img-center img-border"
+        caption="Notice the vertical gaps between pixels on the left and right sides"
+        border="true"
+    )
+}}
 
 <p>This zoomed-in image gives us a better look at the sides:</p>
 
-<figure>
-<img title="Zoomed in circle attempt" src="../assets/draw-a-circle/naive_circle_attempt_zoomed.png" alt="Zoomed in view of a circle with vertical gaps between pixels on the right side" class="img-center img-border">
-<figcaption>One pixel is plotted for every x coordinate</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/draw-a-circle/naive_circle_attempt_zoomed.png"
+        title="Zoomed in circle attempt"
+        alt="Zoomed in view of a circle with vertical gaps between pixels on the right side" class="img-center img-border"
+        caption="One pixel is plotted for every x coordinate"
+        title_caption=""
+        border="true"
+    )
+}}
 
 This isn't exactly what we want but its close.  Let's examine what went wrong.
 
@@ -174,10 +190,14 @@ You will still use the positive/negative values from the quadrants but also tran
 
 > Note: swapping x and y to rotate 45° only works with a center of (0, 0).  If you need to convert between an image's actual coordinates you will have to subtract out the center coordinates.
 
-<figure>
-    <figcaption class="title">Octants</figcaption>
-    <img title="Octants" src="../assets/draw-a-circle/octants.png" alt="Diagram of octant numbering for a circle.  Octant 1 is at the bottom of the top-right quadrant; octants move counter-clockwise." class="img-center">
-</figure>
+{{
+    img(
+        url="../assets/draw-a-circle/octants.png"
+        title="Octants"
+        alt="Diagram of octant numbering for a circle.  Octant 1 is at the bottom of the top-right quadrant; octants move counter-clockwise."
+        title_caption="Octants"
+    )
+}}
 
 ### Looping Over Octants
 
@@ -291,10 +311,15 @@ img.save("simple_antialiased_octant.png")
 
 And here's the results up close:
 
-<figure>
-    <img title="Antialiased octant" src="../assets/draw-a-circle/antialiased_octant.png" alt="A single octant of a circle drawn with antialiasing to create a smooth look" class="img-center img-border">
-    <figcaption>Two adjacent pixels are drawn for each x coordinate.  They are blended into the image based on their opacities.  This better represents fractional coordinates on a pixel grid.</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/draw-a-circle/antialiased_octant.png"
+        title="Antialiased octant"
+        alt="A single octant of a circle drawn with antialiasing to create a smooth look"
+        caption="Two adjacent pixels are drawn for each x coordinate.  They are blended into the image based on their opacities.  This better represents fractional coordinates on a pixel grid."
+        border="true"
+    )
+}}
 
 It should be noted there are other ways to implement simple antialiasing besides just splitting the opacity between the two nearest pixels.  You could use other weighting schemes for opacities or patterns for choosing which pixels to use.  For example, changing the how a desired is blended into the existing color based on whether the current pixel was a horizontal/vertical step or diagonal step.  Diagonal steps have a greater distance from the last pixel than horizontal or vertical steps so you could achieve better results by changing the blending for them.  Each have advantages and disadvantages.
 
