@@ -5,12 +5,17 @@ updated = 2022-12-15
 description = "The purpose of this article to clearly explain how to create a Mobius Strip in Blender using Python.  Technically it's a Mobius Ring since it is a 3d object, but I'll refer to it as a Mobius Strip since that will be a more familiar term for most people.  The goal here is to create a clear and easy to follow explanation of how to create a Mobius Strip in Blender using Python."
 +++
 
-<figure>
-    <a href="../assets/mobius_strip/mobius_strip_rendered.png">
-        <img title="3d mobius strip" src="../assets/mobius_strip/mobius_strip_rendered.png" alt="A 3d mobius strip in Blender" class="img-center">
-    </a>
-    <figcaption>The final product</figcaption>
-</figure>
+
+
+{{
+    img(
+        url="../assets/mobius_strip/mobius_strip_rendered.png"
+        title="3d mobius strip"
+        alt="A 3d mobius strip in Blender"
+        caption="The final product"
+        centered=true
+    )
+}}
 
 
 ## Getting started
@@ -26,13 +31,14 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
 
 ### Axes
 
-<figure>
-<figcaption class="title"><h5>Front view</h5></figcaption>
-<a href="../assets/mobius_strip/axes_thickness.png">
-<img title="Major and minor axes" src="../assets/mobius_strip/axes_thickness.png" alt="From a top view: the major axis shown as a line from the center to outside of a circle; the minor axis is shown as a line across the width of the circle" class="img-center">
-</a>
-<figcaption>The vertices form a rectangle</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/mobius_strip/axes_thickness.png"
+        title="Major and minor axes"
+        alt="From a top view: the major axis shown as a line from the center to outside of a circle; the minor axis is shown as a line across the width of the circle"
+        caption="The vertices form a rectangle"
+    )
+}}
 
 **Note**: we will be using the y axis in Blender as the minor axis and z as the major axis, rotations will be applied around these axes (like rotating around a cylinder or a pole).
 
@@ -40,63 +46,79 @@ We will loop over a specified `resolution`, creating 4 vertices at each iteratio
 
 <ol>
     <li id="step-1">Create 4 vertices.  The width between the vertices is the <code>thickness</code> (distance between front and back sides) and the height is the <code>minor_radius</code> (how tall it should be).
-        <figure>
-        <figcaption class="title"><h5>Front view</h5></figcaption>
-        <a href="../assets/mobius_strip/verts_centered.png">
-        <img title="4 vertices" src="../assets/mobius_strip/verts_centered.png" alt="4 vertices that form a rectangle, centered around (0, 0)" class="img-center">
-        </a>
-        <figcaption>The vertices form a rectangle</figcaption>
-        </figure>
+        {{ img(
+            url="../assets/mobius_strip/verts_centered.png"
+            title="4 vertices"
+            alt="4 vertices that form a rectangle, centered around (0, 0)"
+            caption="The vertices form a rectangle"
+            title_caption="<h5>Front view</h5>"
+           )
+        }}
     </li>
     <li id="step-2">Rotate those vertices around the minor axis
-        <figure>
-        <figcaption class="title"><h5>Front view</h5></figcaption>
-        <a href="../assets/mobius_strip/step2_rotate_minor_axis.webp">
-        <img title="Rotate around the minor axes" src="../assets/mobius_strip/step2_rotate_minor_axis.webp" alt="Viewed from the front: rotating the 4 vertices around the minor axis" class="img-center">
-        </a>
-        <figcaption>Rotate around minor axis</figcaption>
-        </figure>
+        {{ img(
+            url="../assets/mobius_strip/step2_rotate_minor_axis.webp"
+            title="Rotate around the minor axes"
+            alt="Viewed from the front: rotating the 4 vertices around the minor axis"
+            caption="Rotate around minor axis"
+            title_caption="<h5>Front view</h5>"
+            centered=true
+           )
+        }}
     </li>
-    <li id="step-3">Move the vertices <code>major_radius</code> away from the center
-        <figure>
-        <figcaption class="title"><h5>Front view</h5></figcaption>
-        <a href="../assets/mobius_strip/step3_move_vertices.webp">
-        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/step3_move_vertices.webp" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
-        </a>
-        <figcaption>Rotate around minor axis</figcaption>
-        </figure>
+    <li id="step-3">Move the vertices <code>major_radius</code> units away from the center
+        {{
+            img(
+                url="../assets/mobius_strip/step3_move_vertices.webp"
+                title="Move vertices away from center on x axis"
+                alt="Viewed from the front: moving the 4 vertices away from the center on the x axis"
+                caption="Move vertices away from the center"
+                title_caption="<h5>Front view</h5>"
+                centered=true
+            )
+        }}
     </li>
     <li id="step-4">Rotate the vertices around the major axis
-        <figure>
-        <figcaption class="title"><h5>Top view</h5></figcaption>
-        <a href="../assets/mobius_strip/step4_rotate_major_axis.webp">
-        <img title="Move vertices away from center on x axis" src="../assets/mobius_strip/step4_rotate_major_axis.webp" alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" class="img-center">
-        </a>
-        <figcaption>Rotate around major axis</figcaption>
-        </figure>
+        {{
+            img(
+                url="../assets/mobius_strip/step4_rotate_major_axis.webp"
+                title="Rotate vertices on major axis"
+                alt="Viewed from the top: rotating the 4 vertices around the major axis"
+                caption="Rotate around major axis"
+                title_caption="<h5>Top view</h5>"
+                centered=true
+            )
+        }}
     </li>
 </ol>
 
 
 Here are the vertices after each loop iteration:
 
-<figure>
-<figcaption class="title"><h5>Top view</h5></figcaption>
-<a href="../assets/mobius_strip/add.webp">
-<img title="Loop iteration" src="../assets/mobius_strip/add.webp" alt="Viewed from the top: vertices appearing in each iteration after having been moved and rotated" class="img-center">
-</a>
-<figcaption>First half of the loop</figcaption>
-</figure>
+
+{{
+    img(
+        url="../assets/mobius_strip/add.webp"
+        title="Loop iteration"
+        alt="iewed from the top: vertices appearing in each iteration after having been moved and rotated"
+        caption="First half of the loop"
+        title_caption="<h5>Top view</h5>"
+        centered=true
+    )
+}}
 
 Then we just repeat this for the rest of the loop and we will have placed all of our vertices.
 
-<figure>
-<figcaption class="title"><h5>Top view</h5></figcaption>
-<a href="../assets/mobius_strip/verts_complete.png">
-    <img title="Final placement of vertices" src="../assets/mobius_strip/verts_complete.png" alt="Final placement of all vertices in a mobius strip" class="img-center">
-</a>
-<figcaption>All of the vertices after completing the loop</figcaption>
-</figure>
+{{
+    img(
+        url="../assets/mobius_strip/verts_complete.png"
+        title="Final placement of vertices"
+        alt="Final placement of all vertices in a mobius strip"
+        caption="All of the vertices after completing the loop"
+        title_caption="<h5>Top view</h5>"
+        centered=true
+    )
+}}
 
 
 
@@ -329,13 +351,17 @@ ob = bpy.data.objects.new("Mobius Strip Mesh", mesh)
 bpy.context.collection.objects.link(ob)
 ```
 
-<figure>
-    <figcaption class="title">Final mesh</figcaption>
-    <a href="../assets/mobius_strip/mobius_strip_rendered.png">
-        <img title="3d mobius strip" src="../assets/mobius_strip/mobius_strip_rendered.png" alt="From top view: a 3d mobius strip viewed from with Blender's viewport with solid rendering" class="img-center">
-    </a>
-    <figcaption>Final mesh with faces</figcaption>
-</figure>
+
+{{
+    img(
+        url="../assets/mobius_strip/mobius_strip_rendered.png"
+        title="3d mobius strip"
+        alt="From top view: a 3d mobius strip viewed from with Blender's viewport with solid rendering"
+        caption="Final mesh with faces"
+        title_caption="Top view"
+        centered=true
+    )
+}}
 
 ## Final code
 
