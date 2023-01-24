@@ -38,16 +38,17 @@ include_path = false
 include_content = true
 
 [extra]
-katex_enable = true      # include files for rendering math content
-katex_auto_render = true # automatically render math content
-enable_top_link = true   # if true show a link to the top of the page in the header
+katex_enable = true                             # include files for rendering math content
+katex_auto_render = true                        # automatically render math content
+enable_top_link = true                          # if true show a link to the top of the page in the header
+footer_copyright = "&copy; 2022 Andrew Prindle"
 
 # when an updated date is specified you can automatically show a link to the git repo to show the file's history
 # leave blank to disable
 git_file_changes = "https://github.com/vishusandy/vishusandy.github.io/commits/main/content"
 
 # Adds a "Links" link in the header
-[[extra.links]]
+[[extra.header_links]]
 text = "Links"
 url = "/pages/links"
 static_url = false   # if true the url is not a local markdown file
@@ -55,7 +56,7 @@ new_window = false   # whether to open the link in a new window
 attributes = ""      # custom attributes to add to the <a> tag
 
 
-[[extra.links]]
+[[extra.header_links]]
 text = "<i class=\"link-icon fa-brands fa-mastodon\" alt=\"Go to my Mastodon profile\" title=\"My Mastodon profile\"></i>"
 url = "https://social.linux.pizza/@vishus"
 # this is a static url since it's not a link produced by Zola
@@ -65,10 +66,28 @@ new_window = false
 # extra attributes - add the rel="me" for mastodon
 attribues = "target=\"_blank\" rel=\"me noreferrer noopener\" aria-label=\"Open Mastodon profile in a new window\""
 
-[[extra.links]]
+[[extra.header_links]]
 text = "<i class=\"link-icon fa-brands fa-github\" alt=\"Go to my GitHub profile\" title=\"My GitGub\"></i>"
 url = "https://github.com/vishusandy"
 # this is a static url since it's not a link produced by Zola
 static_url = true
 new_window = true
 attributes = "aria-label=\"Open Github profile in a new window\""
+
+
+
+[[extra.footer_links]]
+url = ""
+text = "&copy; 2023 Andrew Prindle"
+static_url = true                   # if true the url is not a local markdown file
+new_window = true                   # whether to open the link in a new window
+attributes = ""                     # custom attributes to add to the <a> tag
+pages_only = false
+
+[[extra.footer_links]]
+url = "https://github.com/vishusandy/vishusandy.github.io"
+text = "Source"
+static_url = true                                          # if true the url is not a local markdown file
+new_window = true                                          # whether to open the link in a new window
+attributes = ""                                            # custom attributes to add to the <a> tag
+pages_only = true
