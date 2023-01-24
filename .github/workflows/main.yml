@@ -27,35 +27,3 @@ jobs:
       ARCH: x86_64-unknown-linux-gnu
       # https://github.com/crazy-max/ghaction-github-pages/issues/1#issuecomment-623202206
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-
-
-
-# name: Zola on GitHub Pages
-
-# on: 
-#  push:
-#   branches:
-#    - main
-
-# jobs:
-#   build:
-#     name: Publish site
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout main
-#       uses: actions/checkout@v3.0.0
-#     - name: Build and deploy
-#       uses: shalzz/zola-deploy-action@v0.16.1
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         # Target branch
-#         PAGES_BRANCH: gh-pages
-#         # Provide personal access token
-#         # Or if publishing to the same repo, use the automatic token
-#         #TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         BUILD_DIR: zola/blog
-#         OUT_DIR: docs
-#         # BUILD_ONLY: true
