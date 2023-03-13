@@ -425,7 +425,9 @@ img.save("bresenham_octant.png")
 
 For more on Bresenham's Circle Algorithm I highly recommend:
 
-- [How to Draw a Circle - Everett Gaius Vergara](https://www.everettgaius.com/article/how-draw-circle-midpoint-and-bresenhams-algorithm) - an excellent article covering both the Midpoint Circle algorithm and Bresenham's algorithm as well as mathematical derivations and code examples
+- [How to Draw a Circle - Everett Gaius Vergara](../assets/draw-a-circle/Everett_Gaius_Vergara.pdf) - an excellent article covering both the Midpoint Circle algorithm and Bresenham's algorithm as well as mathematical derivations and code examples.
+
+    > Note: the above links now points to a PDF of the printed webpage as the original link no longer works
 
 - [Mid-Point Circle Drawing Algorithm - Lectureloops](https://lectureloops.com/bresenhams-circle-drawing-algorithm/) - a good explanation of the math
   
