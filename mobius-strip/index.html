@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <title>Vishus Blog - 3d Mobius Strip</title>
+        <link rel="stylesheet" href='https://vishusandy.github.io/base.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+<link rel="stylesheet" href='https://vishusandy.github.io/code.css'>
+<link rel="stylesheet" href='https://vishusandy.github.io/article.css'>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+
+
+        
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        
+
+<script src="https://vishusandy.github.io/js/top.js"></script>
+<noscript>
+    <style>
+        #top-link {
+            opacity: 1;
+        }
+    </style>
+</noscript>
+
+
+    </head>
+    <body id="top">
+        
+<header>
+    <div class="title">
+        <a href="https://vishusandy.github.io" title="Home" alt="Homepage">Vishus Blog</a>
+    </div>
+    
+    
+    <div class="menu">
+        <a href="#top" id="top-link" title="Go to top of page">Top</a>
+    </div>
+    
+    
+    
+    <div class="links">
+        <ul>
+            <li><a href="https://vishusandy.github.io/pages/links">Links</a></li><li><a href="https://social.linux.pizza/@vishus" target="_blank" rel="me noreferrer noopener" aria-label="Open Mastodon profile in a new window"><i class="link-icon fa-brands fa-mastodon" alt="Go to my Mastodon profile" title="My Mastodon profile"></i></a></li><li><a href="https://github.com/vishusandy" target="_blank" rel="noreferrer noopener"><i class="link-icon fa-brands fa-github" alt="Go to my GitHub profile" title="My GitGub"></i></a></li>
+        </ul>
+    </div>
+    
+</header>
+
+        
+    <h1 class="title">
+        3d Mobius Strip
+    </h1>
+    <div class="subtitle">
+        <div class="created"><time title="Created" class="created" datetime="2022-12-13">2022-12-13</time></div><div class="updated"><a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/mobius_strip.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="2022-12-15">2022-12-15</time></a></div>
+    </div><p>The purpose of this article to clearly explain how to create a Mobius Strip in Blender using Python.  Technically it's a Mobius Ring since it is a 3d object, but I'll refer to it as a Mobius Strip since that will be a more familiar term for most people.  The goal here is to create a clear and easy to follow explanation of how to create a Mobius Strip in Blender using Python.</p>
+        
+
+
+<section class="toc" id="toc">
+    <div class="toc">
+        <h5>Table of Contents</h5>
+        <hr>
+        <ul>
+            <li>
+                <a href="https://vishusandy.github.io/mobius-strip/#getting-started">Getting started</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/mobius-strip/#general-overview">General Overview</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#axes">Axes</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#steps">Steps</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/mobius-strip/#python-code">Python Code</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#imports">Imports</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#helpers">Helpers</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#variables">Variables</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#adding-vertices">Adding vertices</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#faces">Faces</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#adding-the-mesh">Adding the mesh</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/mobius-strip/#final-code">Final code</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/mobius-strip/#download">Download</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/mobius-strip/#credits">Credits</a>
+                
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+        <div class="container">
+            <section class="section">
+                
+    <article id="top" class="markdown-body">
+        
+<figure>
+    <a href="../assets/mobius_strip/mobius_strip_rendered.png">
+        <img src="../assets/mobius_strip/mobius_strip_rendered.png"
+             title="3d mobius strip" 
+             alt="A 3d mobius strip in Blender" 
+             class="img-center">
+    </a>
+
+    <figcaption>The final product</figcaption>
+</figure>
+<h2 id="getting-started"><a class="zola-anchor" href="#getting-started" aria-label="Anchor link for: getting-started">🔗</a>Getting started</h2>
+<p>First I'll describe the steps needed to make a 3d mobius strip then we'll implement those steps in Python code.</p>
+<blockquote>
+<p>If you aren't familiar with using Python in Blender I'd recommend reading my article on <a href="https://vishusandy.github.io/blender-python-setup/">Setting up Blender</a>.  It is written for Linux, but the section <a href="https://vishusandy.github.io/blender-python-setup/#importing-local-python-files">Importing local Python files</a> applies to all operating systems and will help make it easier to run Python code.</p>
+</blockquote>
+<h2 id="general-overview"><a class="zola-anchor" href="#general-overview" aria-label="Anchor link for: general-overview">🔗</a>General Overview</h2>
+<p>We will loop over a specified <code>resolution</code>, creating 4 vertices at each iteration, and then apply some transformations to move and rotate them into the correct positions.  This will create all of the vertices needed for the mesh.  I will not demonstrate creating edges or faces here and leave that for the code; the most important part here is understanding the steps taken to make the general shape.</p>
+<h3 id="axes"><a class="zola-anchor" href="#axes" aria-label="Anchor link for: axes">🔗</a>Axes</h3>
+
+<figure>
+    <a href="../assets/mobius_strip/axes_thickness.png">
+        <img src="../assets/mobius_strip/axes_thickness.png"
+             title="Major and minor axes" 
+             alt="From a top view: the major axis shown as a line from the center to outside of a circle; the minor axis is shown as a line across the width of the circle" 
+             class="img-center">
+    </a>
+
+    <figcaption>The vertices form a rectangle</figcaption>
+</figure>
+<p><strong>Note</strong>: we will be using the y axis in Blender as the minor axis and z as the major axis, rotations will be applied around these axes (like rotating around a cylinder or a pole).</p>
+<h3 id="steps"><a class="zola-anchor" href="#steps" aria-label="Anchor link for: steps">🔗</a>Steps</h3>
+<ol>
+    <li id="step-1">Create 4 vertices.  The width between the vertices is the <code>thickness</code> (distance between front and back sides) and the height is the <code>minor_radius</code> (how tall it should be).
+        
+<figure><figcaption class="title"><h5>Front view</h5></figcaption>
+    <a href="../assets/mobius_strip/verts_centered.png">
+        <img src="../assets/mobius_strip/verts_centered.png"
+             title="4 vertices" 
+             alt="4 vertices that form a rectangle, centered around (0, 0)" 
+             class="img-center">
+    </a>
+
+    <figcaption>The vertices form a rectangle</figcaption>
+</figure>
+
+    </li>
+    <li id="step-2">Rotate those vertices around the minor axis
+        
+<figure><figcaption class="title"><h5>Front view</h5></figcaption>
+    <a href="../assets/mobius_strip/step2_rotate_minor_axis.webp">
+        <img src="../assets/mobius_strip/step2_rotate_minor_axis.webp"
+             title="Rotate around the minor axes" 
+             alt="Viewed from the front: rotating the 4 vertices around the minor axis" 
+             class="img-center">
+    </a>
+
+    <figcaption>Rotate around minor axis</figcaption>
+</figure>
+
+    </li>
+    <li id="step-3">Move the vertices <code>major_radius</code> units away from the center
+        
+<figure><figcaption class="title"><h5>Front view</h5></figcaption>
+    <a href="../assets/mobius_strip/step3_move_vertices.webp">
+        <img src="../assets/mobius_strip/step3_move_vertices.webp"
+             title="Move vertices away from center on x axis" 
+             alt="Viewed from the front: moving the 4 vertices away from the center on the x axis" 
+             class="img-center">
+    </a>
+
+    <figcaption>Move vertices away from the center</figcaption>
+</figure>
+
+    </li>
+    <li id="step-4">Rotate the vertices around the major axis
+        
+<figure><figcaption class="title"><h5>Top view</h5></figcaption>
+    <a href="../assets/mobius_strip/step4_rotate_major_axis.webp">
+        <img src="../assets/mobius_strip/step4_rotate_major_axis.webp"
+             title="Rotate vertices on major axis" 
+             alt="Viewed from the top: rotating the 4 vertices around the major axis" 
+             class="img-center">
+    </a>
+
+    <figcaption>Rotate around major axis</figcaption>
+</figure>
+
+    </li>
+</ol>
+<p>Here are the vertices after each loop iteration:</p>
+
+<figure><figcaption class="title"><h5>Top view</h5></figcaption>
+    <a href="../assets/mobius_strip/add.webp">
+        <img src="../assets/mobius_strip/add.webp"
+             title="Loop iteration" 
+             alt="iewed from the top: vertices appearing in each iteration after having been moved and rotated" 
+             class="img-center">
+    </a>
+
+    <figcaption>First half of the loop</figcaption>
+</figure>
+<p>Then we just repeat this for the rest of the loop and we will have placed all of our vertices.</p>
+
+<figure><figcaption class="title"><h5>Top view</h5></figcaption>
+    <a href="../assets/mobius_strip/verts_complete.png">
+        <img src="../assets/mobius_strip/verts_complete.png"
+             title="Final placement of vertices" 
+             alt="Final placement of all vertices in a mobius strip" 
+             class="img-center">
+    </a>
+
+    <figcaption>All of the vertices after completing the loop</figcaption>
+</figure>
+<h2 id="python-code"><a class="zola-anchor" href="#python-code" aria-label="Anchor link for: python-code">🔗</a>Python Code</h2>
+<p>We will be using Blender's <a rel="noopener nofollow noreferrer" target="_blank" href="https://docs.blender.org/api/current/mathutils.html">Mathutils</a> module - specifically the <a rel="noopener nofollow noreferrer" target="_blank" href="https://docs.blender.org/api/current/mathutils.html#mathutils.Vector">Vector</a> and <a rel="noopener nofollow noreferrer" target="_blank" href="https://docs.blender.org/api/current/mathutils.html#mathutils.Matrix">Matrix</a> types.  Vector will be used to store 3d coordinates and Matrix will be used to rotate the coordinates.</p>
+<p>Note: just like above we will be using the y axis as our minor axis, and z as our major axis.</p>
+<h3 id="imports"><a class="zola-anchor" href="#imports" aria-label="Anchor link for: imports">🔗</a>Imports</h3>
+<p>Let's import some math libraries and Blender's Python utilities:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>bpy
+</span><span style="color:#0077aa;">from </span><span>math </span><span style="color:#0077aa;">import </span><span>*
+</span><span style="color:#0077aa;">from </span><span>mathutils </span><span style="color:#0077aa;">import </span><span>Vector</span><span style="color:#090909;">, </span><span>Matrix
+</span></code></pre>
+<h3 id="helpers"><a class="zola-anchor" href="#helpers" aria-label="Anchor link for: helpers">🔗</a>Helpers</h3>
+<p>Let's define an <code>apply</code> function to multiply a 3d coordinate (vector) with a matrix in order to rotate it:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">def </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span style="color:#676b79;">matrix</span><span style="color:#090909;">, </span><span style="color:#676b79;">vector</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;">&#39;&#39;&#39;
+</span><span style="color:#606e7c;">    apply(matrix, vector) -&gt; vector
+</span><span style="color:#606e7c;">
+</span><span style="color:#606e7c;">    this function receives a matrix and a vector and returns
+</span><span style="color:#606e7c;">    the vector obtained by multipling each row of the matrix
+</span><span style="color:#606e7c;">    with the vector
+</span><span style="color:#606e7c;">    &#39;&#39;&#39;
+</span><span>    V_0 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]
+</span><span>    V_1 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">]
+</span><span>    V_2 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">]
+</span><span>    </span><span style="color:#0077aa;">return </span><span>Vector</span><span style="color:#3787c7;">((</span><span>V_0</span><span style="color:#090909;">, </span><span>V_1</span><span style="color:#090909;">, </span><span>V_2</span><span style="color:#3787c7;">))
+</span></code></pre>
+<p>We'll talk more about matrices later.</p>
+<h3 id="variables"><a class="zola-anchor" href="#variables" aria-label="Anchor link for: variables">🔗</a>Variables</h3>
+<p>We'll create a function with some user-defined variables:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">def </span><span style="color:#bb4188;">mobius</span><span style="color:#3787c7;">(</span><span style="color:#676b79;">major_radius</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#676b79;">minor_radius</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">15</span><span style="color:#090909;">, </span><span style="color:#676b79;">thick</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#676b79;">resolution</span><span style="color:#090909;">: </span><span style="color:#bb4188;">int </span><span>= </span><span style="color:#bb4188;">108</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;">&#39;&#39;&#39;
+</span><span style="color:#606e7c;">    major_radius - how large the strip will be
+</span><span style="color:#606e7c;">    minor_radius - defines how tall the strip will be (surface width)
+</span><span style="color:#606e7c;">    thick        - distance between front and back sides
+</span><span style="color:#606e7c;">    resolution   - number of loop iterations to perform
+</span><span style="color:#606e7c;">    &#39;&#39;&#39;
+</span></code></pre>
+<p>Initalize an empty list to hold our vertices and eventually faces:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>verts = </span><span style="color:#3787c7;">[]
+</span><span>faces = </span><span style="color:#3787c7;">[]
+</span></code></pre>
+<p>And finally create a variable that represents the distance to move the vertices away from the center, which will be used later (shown in <a href="#step-3">step 3</a> from earlier):</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>dx = Vector</span><span style="color:#3787c7;">([</span><span>major_radius</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">])
+</span></code></pre>
+<p>When added to another vector this will move the vertices <code>major_radius</code> units away from the center, which will be applied before rotating around the major axis.  We store the distance in the x coordinate to move vertices horizontally before rotating around the z axis (<a href="#step-4">in step 4</a>).</p>
+<h3 id="adding-vertices"><a class="zola-anchor" href="#adding-vertices" aria-label="Anchor link for: adding-vertices">🔗</a>Adding vertices</h3>
+<p>Let's define our main loop:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">for </span><span>i </span><span style="color:#0077aa;">in </span><span style="color:#bb4188;">range</span><span style="color:#3787c7;">(</span><span>resolution</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;"># the angle to rotate around the minor axis (covers a 180° rotation)
+</span><span>    phi = pi * i / resolution
+</span><span>    
+</span><span>    </span><span style="color:#606e7c;"># the angle to rotate around the major axis (covers a 360° rotation)
+</span><span>    theta = phi * </span><span style="color:#bb4188;">2
+</span><span>    
+</span><span>    </span><span style="color:#606e7c;"># how many vertices do we have in our list
+</span><span>    idx = </span><span style="color:#bb4188;">len</span><span style="color:#3787c7;">(</span><span>verts</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>In the loop body we define two angles, represented in <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Radian">Radians</a>.  The angles will be gradually increased as <code>i</code> is incremented.</p>
+<p><code>phi</code> represents the angle to rotate around the minor axis (<a href="#step-2">step 2</a> from earlier).  It will end up covering a 180° rotation, which means it will only be rotated half way.  This is how we rotate the surface of the mobius strip.  The vertices of the last loop iteration will rotated 180° so the top of those vertices will connect to the bottom of the vertices from the first loop iteration and vice versa.</p>
+<p><code>theta</code> represents the angle to rotate around the major axis (<a href="#step-3">step 3</a> from earlier).  It will end up covering a 360° rotation, which means it will be rotated all the way around.  This is how we get an overall circular shape.</p>
+<p><code>idx</code> is our current position in the list of vertices.  We will use this later to create faces between the vertices.</p>
+<h4 id="initial-vertices"><a class="zola-anchor" href="#initial-vertices" aria-label="Anchor link for: initial-vertices">🔗</a>Initial vertices</h4>
+<p>In the body of the loop we'll create our initial points (<a href="#step-1">step 1</a> from earlier):</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>p0 = Vector</span><span style="color:#3787c7;">(( </span><span>-thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">,  </span><span>minor_radius </span><span style="color:#3787c7;">))
+</span><span>p1 = Vector</span><span style="color:#3787c7;">((  </span><span>thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">,  </span><span>minor_radius </span><span style="color:#3787c7;">))
+</span><span>p2 = Vector</span><span style="color:#3787c7;">((  </span><span>thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>-minor_radius </span><span style="color:#3787c7;">))
+</span><span>p3 = Vector</span><span style="color:#3787c7;">(( </span><span>-thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>-minor_radius </span><span style="color:#3787c7;">))
+</span></code></pre>
+<p>Since the four vertices will initially be a rectangle be centered around <code>(0, 0)</code>, we can just specify the coordinates we want.  The thickness is divided by 2 because <code>thick</code> defines the total thickness, not the distance from the center (although that detail is less important since we could have just defined <code>thick = 0.05</code> instead of using <code>0.1</code>).</p>
+<h4 id="defining-rotation-matrices"><a class="zola-anchor" href="#defining-rotation-matrices" aria-label="Anchor link for: defining-rotation-matrices">🔗</a>Defining Rotation Matrices</h4>
+<p>In order to create the mesh we'll need to use a little math.  If you're not familiar with rotation matrices that's <em>ok</em>, the most important thing to know is that we can multiply a vector (which stores the <code>(x,y,z</code> coordinates) by a matrix in order to rotate the coordinates.  For more detailed information on how this works see <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Rotation_matrix">Wikipedia - Rotation matrix</a> or <a rel="noopener nofollow noreferrer" target="_blank" href="https://math.stackexchange.com/questions/363652/understanding-rotation-matrices">Stack Exchange - Understanding rotation matrices</a>.</p>
+<p>Here we create a couple rotation matrices to rotate our vertices around the major and minor axes:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#606e7c;"># Rotates along major radius
+</span><span style="color:#606e7c;"># angle=theta, size=3, axis=[0, 0, 1]
+</span><span>rot_theta = Matrix</span><span style="color:#090909;">.</span><span>Rotation</span><span style="color:#3787c7;">(</span><span>theta</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])
+</span><span>
+</span><span style="color:#606e7c;"># Rotates along minor radius
+</span><span style="color:#606e7c;"># angle=phi, size=3, axis=[0, 1, 0]
+</span><span>rot_phi = Matrix</span><span style="color:#090909;">.</span><span>Rotation</span><span style="color:#3787c7;">(</span><span>phi</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">])
+</span></code></pre>
+<p><code>rot_theta</code> uses <code>[0, 0, 1]</code> to specify a rotation around the z axis while <code>rot_phi</code> uses <code>[0, 1, 0]</code> to specify a rotation around the y axis.  The size is set to 3 because we want a 3-dimensional matrix.</p>
+<h4 id="transforms"><a class="zola-anchor" href="#transforms" aria-label="Anchor link for: transforms">🔗</a>Transforms</h4>
+<p>We will need to perform three operations on the vertices:</p>
+<ol>
+<li>
+<p>Rotate around the minor axis (as seen in <a href="#step-2">step 2</a>)</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>p0_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p0</span><span style="color:#3787c7;">)
+</span><span>p1_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p1</span><span style="color:#3787c7;">)
+</span><span>p2_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p2</span><span style="color:#3787c7;">)
+</span><span>p3_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p3</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>We are using the <code>apply()</code> function from earlier to multiply each row of the rotation matrix by the 3d coordinates in the vector:</p>
+</li>
+<li>
+<p>Move the vertices away from the center (horizontally, as seen in <a href="#step-3">step 3</a>)</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>p0_moved = p0_rotated + dx
+</span><span>p1_moved = p1_rotated + dx
+</span><span>p2_moved = p2_rotated + dx
+</span><span>p3_moved = p3_rotated + dx
+</span></code></pre>
+</li>
+<li>
+<p>Rotate around the major axis to get our final vertices (as seen in <a href="#step-4">step 4</a>)</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>v0 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p0_moved</span><span style="color:#3787c7;">)
+</span><span>v1 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p1_moved</span><span style="color:#3787c7;">)
+</span><span>v2 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p2_moved</span><span style="color:#3787c7;">)
+</span><span>v3 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p3_moved</span><span style="color:#3787c7;">)
+</span></code></pre>
+</li>
+</ol>
+<p>Then we will add those vertices to our list of vertices with:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>verts</span><span style="color:#090909;">.</span><span>extend</span><span style="color:#3787c7;">([</span><span>v0</span><span style="color:#090909;">, </span><span>v1</span><span style="color:#090909;">, </span><span>v2</span><span style="color:#090909;">, </span><span>v3</span><span style="color:#3787c7;">])
+</span></code></pre>
+<h3 id="faces"><a class="zola-anchor" href="#faces" aria-label="Anchor link for: faces">🔗</a>Faces</h3>
+<p>Faces are added by connecting multiple vertices.  Each vertice is referenced by its position in the <code>verts</code> list.</p>
+<ol>
+<li>
+<p>First we identify the next vertices that will be added, assuming we are not at the end:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#606e7c;"># `idx` represents the position of the first newly added vertice
+</span><span style="color:#606e7c;"># so since we want the position of the next vertices we add 4 to that
+</span><span>next_verts = idx + </span><span style="color:#bb4188;">4
+</span><span>
+</span><span style="color:#606e7c;"># If we are not at the end of the loop we find the index positions
+</span><span style="color:#606e7c;"># of the next vertices in the `verts` list
+</span><span style="color:#0077aa;">if </span><span>i+</span><span style="color:#bb4188;">1 </span><span>&lt; resolution</span><span style="color:#3787c7;">:
+</span><span>    n0 = next_verts + </span><span style="color:#bb4188;">0
+</span><span>    n1 = next_verts + </span><span style="color:#bb4188;">1
+</span><span>    n2 = next_verts + </span><span style="color:#bb4188;">2
+</span><span>    n3 = next_verts + </span><span style="color:#bb4188;">3
+</span></code></pre>
+</li>
+<li>
+<p>If we are at the end we handle that differently:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#606e7c;"># Otherwise reference the vertices created the very first loop iteration
+</span><span style="color:#0077aa;">else</span><span style="color:#3787c7;">:
+</span><span>    n0 =  </span><span style="color:#bb4188;">2
+</span><span>    n1 =  </span><span style="color:#bb4188;">3
+</span><span>    n2 =  </span><span style="color:#bb4188;">0
+</span><span>    n3 =  </span><span style="color:#bb4188;">1
+</span></code></pre>
+<p>Remember the top and bottoms get switched at the end because it will be rotated by 180°, so the vertices do not have an obviousordering.</p>
+</li>
+<li>
+<p>And finally let's create those faces in our list:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span>n1</span><span style="color:#090909;">, </span><span>n0</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># top face
+</span><span>faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span>n2</span><span style="color:#090909;">, </span><span>n1</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># front side face
+</span><span>faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span>n3</span><span style="color:#090909;">, </span><span>n2</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># bottom face
+</span><span>faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>n0</span><span style="color:#090909;">, </span><span>n3</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># back side face
+</span></code></pre>
+<blockquote>
+<p>Remember <code>idx</code> is the position of the first newly added vertice in the list</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="adding-the-mesh"><a class="zola-anchor" href="#adding-the-mesh" aria-label="Anchor link for: adding-the-mesh">🔗</a>Adding the mesh</h3>
+<p>Once the loop is finished we can use the <code>verts</code> and <code>faces</code> lists to create our mesh using <a rel="noopener nofollow noreferrer" target="_blank" href="https://docs.blender.org/api/current/bpy.types.Mesh.html#bpy.types.Mesh.from_pydata"><code>from_pydata()</code></a> and validate using <a rel="noopener nofollow noreferrer" target="_blank" href="https://docs.blender.org/api/current/bpy.types.Mesh.html#bpy.types.Mesh.validate"><code>validate()</code></a> (which returns <code>true</code> if the mesh is invalid).</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#606e7c;"># Create a blank mesh
+</span><span>mesh = bpy</span><span style="color:#090909;">.</span><span>data</span><span style="color:#090909;">.</span><span>meshes</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">mobius_strip</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span><span>
+</span><span style="color:#606e7c;"># Create a mesh from the given vertices and faces
+</span><span>mesh</span><span style="color:#090909;">.</span><span>from_pydata</span><span style="color:#3787c7;">(</span><span>verts</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[]</span><span style="color:#090909;">, </span><span>faces</span><span style="color:#3787c7;">)
+</span><span>
+</span><span style="color:#606e7c;"># Ensure the mesh is valid
+</span><span style="color:#0077aa;">if </span><span>mesh</span><span style="color:#090909;">.</span><span>validate</span><span style="color:#3787c7;">():
+</span><span>    </span><span style="color:#bb4188;">print</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&#39;</span><span style="color:#669900;">Invalid mesh</span><span style="color:#090909;">&#39;</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#0077aa;">return
+</span><span>
+</span><span style="color:#606e7c;"># Create a new object
+</span><span>ob = bpy</span><span style="color:#090909;">.</span><span>data</span><span style="color:#090909;">.</span><span>objects</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">Mobius Strip Mesh</span><span style="color:#090909;">&quot;, </span><span>mesh</span><span style="color:#3787c7;">)
+</span><span>
+</span><span style="color:#606e7c;"># Add our object to the current collection
+</span><span>bpy</span><span style="color:#090909;">.</span><span>context</span><span style="color:#090909;">.</span><span>collection</span><span style="color:#090909;">.</span><span>objects</span><span style="color:#090909;">.</span><span>link</span><span style="color:#3787c7;">(</span><span>ob</span><span style="color:#3787c7;">)
+</span></code></pre>
+
+<figure><figcaption class="title">Top view</figcaption>
+    <a href="../assets/mobius_strip/mobius_strip_rendered.png">
+        <img src="../assets/mobius_strip/mobius_strip_rendered.png"
+             title="3d mobius strip" 
+             alt="From top view: a 3d mobius strip viewed from with Blender&#x27;s viewport with solid rendering" 
+             class="img-center">
+    </a>
+
+    <figcaption>Final mesh with faces</figcaption>
+</figure>
+<h2 id="final-code"><a class="zola-anchor" href="#final-code" aria-label="Anchor link for: final-code">🔗</a>Final code</h2>
+<p>Here is the code:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>bpy
+</span><span style="color:#0077aa;">from </span><span>math </span><span style="color:#0077aa;">import </span><span>*
+</span><span style="color:#0077aa;">from </span><span>mathutils </span><span style="color:#0077aa;">import </span><span>Vector</span><span style="color:#090909;">, </span><span>Matrix
+</span><span>
+</span><span style="color:#0077aa;">def </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span style="color:#676b79;">matrix</span><span style="color:#090909;">, </span><span style="color:#676b79;">vector</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;">&#39;&#39;&#39;
+</span><span style="color:#606e7c;">    apply(matrix, vector) -&gt; vector
+</span><span style="color:#606e7c;">
+</span><span style="color:#606e7c;">    this function receives a matrix and a vector and returns
+</span><span style="color:#606e7c;">    the vector obtained by multipling each row of the matrix
+</span><span style="color:#606e7c;">    with the vector
+</span><span style="color:#606e7c;">    &#39;&#39;&#39;
+</span><span>    V_0 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]
+</span><span>    V_1 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">]
+</span><span>    V_2 = vector @ matrix</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">]
+</span><span>    </span><span style="color:#0077aa;">return </span><span>Vector</span><span style="color:#3787c7;">((</span><span>V_0</span><span style="color:#090909;">, </span><span>V_1</span><span style="color:#090909;">, </span><span>V_2</span><span style="color:#3787c7;">))
+</span><span>
+</span><span style="color:#0077aa;">def </span><span style="color:#bb4188;">mobius</span><span style="color:#3787c7;">(</span><span style="color:#676b79;">major_radius</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#676b79;">minor_radius</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">15</span><span style="color:#090909;">, </span><span style="color:#676b79;">thick</span><span style="color:#090909;">: </span><span style="color:#bb4188;">float </span><span>= </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#676b79;">resolution</span><span style="color:#090909;">: </span><span style="color:#bb4188;">int </span><span>= </span><span style="color:#bb4188;">108</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;">&#39;&#39;&#39;
+</span><span style="color:#606e7c;">    major_radius - how large the strip will be
+</span><span style="color:#606e7c;">    minor_radius - defines how tall the strip will be (surface width)
+</span><span style="color:#606e7c;">    thick        - distance between front and back sides
+</span><span style="color:#606e7c;">    resolution   - number of loop iterations to perform
+</span><span style="color:#606e7c;">    &#39;&#39;&#39;
+</span><span>
+</span><span>    verts = </span><span style="color:#3787c7;">[]
+</span><span>    faces = </span><span style="color:#3787c7;">[]
+</span><span>    dx = Vector</span><span style="color:#3787c7;">([</span><span>major_radius</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">])
+</span><span>
+</span><span>    </span><span style="color:#0077aa;">for </span><span>i </span><span style="color:#0077aa;">in </span><span style="color:#bb4188;">range</span><span style="color:#3787c7;">(</span><span>resolution</span><span style="color:#3787c7;">):
+</span><span>        </span><span style="color:#606e7c;"># the angle to rotate around the minor axis (covers a 180° rotation)
+</span><span>        phi = pi * i / resolution
+</span><span>        
+</span><span>        </span><span style="color:#606e7c;"># the angle to rotate around the major axis (covers a 360° rotation)
+</span><span>        theta = phi * </span><span style="color:#bb4188;">2
+</span><span>        
+</span><span>        </span><span style="color:#606e7c;"># how many vertices do we have in our list
+</span><span>        idx = </span><span style="color:#bb4188;">len</span><span style="color:#3787c7;">(</span><span>verts</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>        p0 = Vector</span><span style="color:#3787c7;">(( </span><span>-thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">,  </span><span>minor_radius </span><span style="color:#3787c7;">))
+</span><span>        p1 = Vector</span><span style="color:#3787c7;">((  </span><span>thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">,  </span><span>minor_radius </span><span style="color:#3787c7;">))
+</span><span>        p2 = Vector</span><span style="color:#3787c7;">((  </span><span>thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>-minor_radius </span><span style="color:#3787c7;">))
+</span><span>        p3 = Vector</span><span style="color:#3787c7;">(( </span><span>-thick/</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>-minor_radius </span><span style="color:#3787c7;">))
+</span><span>
+</span><span>        </span><span style="color:#606e7c;"># Rotates along major radius
+</span><span>        </span><span style="color:#606e7c;"># angle=theta, size=3, axis=[0, 0, 1]
+</span><span>        rot_theta = Matrix</span><span style="color:#090909;">.</span><span>Rotation</span><span style="color:#3787c7;">(</span><span>theta</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])
+</span><span>
+</span><span>        </span><span style="color:#606e7c;"># Rotates along minor radius
+</span><span>        </span><span style="color:#606e7c;"># angle=phi, size=3, axis=[0, 1, 0]
+</span><span>        rot_phi = Matrix</span><span style="color:#090909;">.</span><span>Rotation</span><span style="color:#3787c7;">(</span><span>phi</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">])
+</span><span>
+</span><span>        p0_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p0</span><span style="color:#3787c7;">)
+</span><span>        p1_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p1</span><span style="color:#3787c7;">)
+</span><span>        p2_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p2</span><span style="color:#3787c7;">)
+</span><span>        p3_rotated = </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_phi</span><span style="color:#090909;">, </span><span>p3</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>        p0_moved = p0_rotated + dx
+</span><span>        p1_moved = p1_rotated + dx
+</span><span>        p2_moved = p2_rotated + dx
+</span><span>        p3_moved = p3_rotated + dx
+</span><span>
+</span><span>        v0 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p0_moved</span><span style="color:#3787c7;">)
+</span><span>        v1 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p1_moved</span><span style="color:#3787c7;">)
+</span><span>        v2 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p2_moved</span><span style="color:#3787c7;">)
+</span><span>        v3 =  </span><span style="color:#bb4188;">apply</span><span style="color:#3787c7;">(</span><span>rot_theta</span><span style="color:#090909;">, </span><span>p3_moved</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>        verts</span><span style="color:#090909;">.</span><span>extend</span><span style="color:#3787c7;">([</span><span>v0</span><span style="color:#090909;">, </span><span>v1</span><span style="color:#090909;">, </span><span>v2</span><span style="color:#090909;">, </span><span>v3</span><span style="color:#3787c7;">])
+</span><span>
+</span><span>        </span><span style="color:#606e7c;"># `idx` represents the position of the first newly added vertice
+</span><span>        </span><span style="color:#606e7c;"># so since we want the position of the next vertices we add 4 to that
+</span><span>        next_verts = idx + </span><span style="color:#bb4188;">4
+</span><span>
+</span><span>        </span><span style="color:#606e7c;"># If we are not at the end of the loop we find the index positions
+</span><span>        </span><span style="color:#606e7c;"># of the next vertices in the `verts` list
+</span><span>        </span><span style="color:#0077aa;">if </span><span>i+</span><span style="color:#bb4188;">1 </span><span>&lt; resolution</span><span style="color:#3787c7;">:
+</span><span>            n0 = next_verts + </span><span style="color:#bb4188;">0
+</span><span>            n1 = next_verts + </span><span style="color:#bb4188;">1
+</span><span>            n2 = next_verts + </span><span style="color:#bb4188;">2
+</span><span>            n3 = next_verts + </span><span style="color:#bb4188;">3
+</span><span>        </span><span style="color:#606e7c;"># Otherwise reference the vertices created the very first loop iteration
+</span><span>        </span><span style="color:#0077aa;">else</span><span style="color:#3787c7;">:
+</span><span>            n0 =  </span><span style="color:#bb4188;">2
+</span><span>            n1 =  </span><span style="color:#bb4188;">3
+</span><span>            n2 =  </span><span style="color:#bb4188;">0
+</span><span>            n3 =  </span><span style="color:#bb4188;">1
+</span><span>        faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span>n1</span><span style="color:#090909;">, </span><span>n0</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># top face
+</span><span>        faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">1</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span>n2</span><span style="color:#090909;">, </span><span>n1</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># front side face
+</span><span>        faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span>n3</span><span style="color:#090909;">, </span><span>n2</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># bottom face
+</span><span>        faces</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">([</span><span>idx+</span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span>idx+</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span>n0</span><span style="color:#090909;">, </span><span>n3</span><span style="color:#3787c7;">])  </span><span style="color:#606e7c;"># back side face
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># Create a blank mesh
+</span><span>    mesh = bpy</span><span style="color:#090909;">.</span><span>data</span><span style="color:#090909;">.</span><span>meshes</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">mobius_strip</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># Create a mesh from the given vertices and faces
+</span><span>    mesh</span><span style="color:#090909;">.</span><span>from_pydata</span><span style="color:#3787c7;">(</span><span>verts</span><span style="color:#090909;">, </span><span style="color:#3787c7;">[]</span><span style="color:#090909;">, </span><span>faces</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># Ensure the mesh is valid
+</span><span>    </span><span style="color:#0077aa;">if </span><span>mesh</span><span style="color:#090909;">.</span><span>validate</span><span style="color:#3787c7;">():
+</span><span>        </span><span style="color:#bb4188;">print</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&#39;</span><span style="color:#669900;">Invalid mesh</span><span style="color:#090909;">&#39;</span><span style="color:#3787c7;">)
+</span><span>        </span><span style="color:#0077aa;">return
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># Create a new object
+</span><span>    ob = bpy</span><span style="color:#090909;">.</span><span>data</span><span style="color:#090909;">.</span><span>objects</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">Mobius Strip Mesh</span><span style="color:#090909;">&quot;, </span><span>mesh</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># Add our object to the current collection
+</span><span>    bpy</span><span style="color:#090909;">.</span><span>context</span><span style="color:#090909;">.</span><span>collection</span><span style="color:#090909;">.</span><span>objects</span><span style="color:#090909;">.</span><span>link</span><span style="color:#3787c7;">(</span><span>ob</span><span style="color:#3787c7;">)
+</span><span>
+</span><span style="color:#606e7c;"># run the function
+</span><span>mobius</span><span style="color:#3787c7;">()
+</span></code></pre>
+<p>You can just paste that code into new a Blender text document and press the Run icon (the triangle) and a 3d mobius strip will appear!</p>
+<h3 id="download"><a class="zola-anchor" href="#download" aria-label="Anchor link for: download">🔗</a>Download</h3>
+<p>Or you can download the final code here:
+<a href="../assets/mobius_strip/mobius_strip.py">mobius_strip.py</a></p>
+<h2 id="credits"><a class="zola-anchor" href="#credits" aria-label="Anchor link for: credits">🔗</a>Credits</h2>
+<p>This article is basically a much more verbose explanation and reimplementation of the code from <a rel="noopener nofollow noreferrer" target="_blank" href="https://blender.stackexchange.com/questions/82480/how-to-make-a-mobius-strip/168967#168967">this Stack Exchange post</a></p>
+
+    </article>
+
+            </section>
+        </div>
+        
+
+<footer>
+    <ul>
+        
+                    <li>&copy; 2023 Andrew Prindle</li>
+                    <li>
+                    <a href="https://github.com/vishusandy/vishusandy.github.io" target="_blank"
+                        rel="noreferrer noopener" >Source</a>
+                    </li><li>
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/mobius_strip.md" target="_blank" rel="noreferrer noopener">
+                Updated <time title="Updated" class="updated" datetime="2022-12-15">2022-12-15</time></a>
+        </li>
+    </ul>
+</footer>
+
+
+    </body>
+</html>

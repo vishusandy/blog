@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <title>Vishus Blog - Floating-points All the Way Down</title>
+        <link rel="stylesheet" href='https://vishusandy.github.io/base.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+<link rel="stylesheet" href='https://vishusandy.github.io/code.css'>
+<link rel="stylesheet" href='https://vishusandy.github.io/article.css'>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+
+
+        
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        
+
+<script src="https://vishusandy.github.io/js/top.js"></script>
+<noscript>
+    <style>
+        #top-link {
+            opacity: 1;
+        }
+    </style>
+</noscript>
+
+
+    </head>
+    <body id="top">
+        
+<header>
+    <div class="title">
+        <a href="https://vishusandy.github.io" title="Home" alt="Homepage">Vishus Blog</a>
+    </div>
+    
+    
+    <div class="menu">
+        <a href="#top" id="top-link" title="Go to top of page">Top</a>
+    </div>
+    
+    
+    
+    <div class="links">
+        <ul>
+            <li><a href="https://vishusandy.github.io/pages/links">Links</a></li><li><a href="https://social.linux.pizza/@vishus" target="_blank" rel="me noreferrer noopener" aria-label="Open Mastodon profile in a new window"><i class="link-icon fa-brands fa-mastodon" alt="Go to my Mastodon profile" title="My Mastodon profile"></i></a></li><li><a href="https://github.com/vishusandy" target="_blank" rel="noreferrer noopener"><i class="link-icon fa-brands fa-github" alt="Go to my GitHub profile" title="My GitGub"></i></a></li>
+        </ul>
+    </div>
+    
+</header>
+
+        
+    <h1 class="title">
+        Floating-points All the Way Down
+    </h1>
+    <div class="subtitle">
+        <div class="created"><time title="Created" class="created" datetime="2022-09-23">2022-09-23</time></div><div class="updated"><a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/floats_vs_ints.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="2022-11-28">2022-11-28</time></a></div>
+    </div><p>Floating-point numbers are widely used.  In languages like JavaScript they are the sole numeric type (BigInt aside), yet their behavior can have surprising effects.  In order to write performant, bug-free code it helps to understand their representation and quirks.</p>
+        
+
+
+<section class="toc" id="toc">
+    <div class="toc">
+        <h5>Table of Contents</h5>
+        <hr>
+        <ul>
+            <li>
+                <a href="https://vishusandy.github.io/floats-vs-ints/#floating-point-representation">Floating-point representation</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/floats-vs-ints/#accuracy">Accuracy</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/floats-vs-ints/#epsilon">Epsilon</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/floats-vs-ints/#special-values">Special values</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/floats-vs-ints/#performance">Performance</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/floats-vs-ints/#vector-instructions">Vector Instructions</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/floats-vs-ints/#smt">SMT</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/floats-vs-ints/#alternatives">Alternatives</a>
+                
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+        <div class="container">
+            <section class="section">
+                
+    <article id="top" class="markdown-body">
+        <h2 id="floating-point-representation"><a class="zola-anchor" href="#floating-point-representation" aria-label="Anchor link for: floating-point-representation">🔗</a>Floating-point representation</h2>
+<p>I won't delve too deeply (or greedily) into exactly how IEEE 754 numbers are represented (lest we discover what they awoke in the darkness of Khazad-dum); there's just too much to cover here.  Floating-point numbers are stored in a way that resembles scientific notation. It stores two parts: a decimal number between 0 and 1 (called the <em>mantissa</em>) and an exponent, along with a bit used to represent whether it is a positive or negative number.</p>
+<p>There two main two types of floating-point numbers: the <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a> <code>single</code> (binary32) and <code>double</code> (binary64) precision floating-point numbers. Other, less popular, formats for storing decimal numbers exist but for the rest of this article you should assume either <code>single</code> or <code>double</code> when I mention a floating-point number.</p>
+<p>If you use JavaScript you're actually using 64bit floating point numbers - or <code>double</code>s for those familiar with C or Java.</p>
+<blockquote>
+<p>Well that's not entirely true - there are some internal optimizations that can represent some numbers as integers, but you should just assume all numbers in JavaScript are represented as <code>double</code>s (<a rel="noopener nofollow noreferrer" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt"><code>BigInt</code></a>s aside). For more on JS optimization I recommend reading the <a rel="noopener nofollow noreferrer" target="_blank" href="https://v8.dev/blog">V8 Blog</a></p>
+</blockquote>
+<h2 id="accuracy"><a class="zola-anchor" href="#accuracy" aria-label="Anchor link for: accuracy">🔗</a>Accuracy</h2>
+<p>Perhaps the most overlooked aspect of floating-point numbers is their accuracy. Take the example of adding <code>0.1 + 0.2</code> from <a rel="noopener nofollow noreferrer" target="_blank" href="https://floating-point-gui.de/errors/comparison/">The Floating-Point Guide</a>. If you tried this in JavaScript or Python you would <em>not</em> get the value <code>0.3</code> but instead something like <code>0.30000000000000004</code>. However, <code>0.15 + 0.15</code> will work and returns <code>0.3</code>.  The floating-point formats have limited precision so there will often be some kind of <em>rounding error</em>.</p>
+<p>A common pitfall is checking equality of two floating-point numbers where one or both are the result of computation. The following returns <code>false</code>:</p>
+<pre data-lang="javascript" style="background-color:#f6f8fa;color:#000000;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#bb4188;">0.1 </span><span>+ </span><span style="color:#bb4188;">0.2 </span><span>== </span><span style="color:#bb4188;">0.3  </span><span style="color:#606e7c;">// false
+</span></code></pre>
+<p>Performing computation on floating-point numbers has the potential to create different results, depending on what operations are performed and in what order. Each floating-point operation could potentially create <em>rounding errors</em> when the actual computed number would require greater precision than can actually fit into the data type.</p>
+<h3 id="epsilon"><a class="zola-anchor" href="#epsilon" aria-label="Anchor link for: epsilon">🔗</a>Epsilon</h3>
+<p>To avoid issues caused by numbers being off by these very small amounts, a margin of error can be used that represents a very small value. This is referred to as epsilon (<a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Machine_epsilon">Machine epsilon</a>), and represents the difference between 1.0 and the next largest number that can be represented in the data type (so something similar to 1.000001 but even smaller). Instead of checking two floating-point numbers for equality instead subtract them and compare that difference against epsilon. It should be noted that you may have to use a value greater than epsilon. For example, I have had to use <code>epsilon * 3.0</code> in some of my code to get correct results, but that is still a very small number.</p>
+<h4 id="epsilon-in-python"><a class="zola-anchor" href="#epsilon-in-python" aria-label="Anchor link for: epsilon-in-python">🔗</a>Epsilon in Python</h4>
+<p>Epsilon in Python is represented by <code>sys.float_info.epsilon</code></p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>sys
+</span><span>a = </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">15 </span><span>+ </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">15
+</span><span>b = </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">1 </span><span>+ </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">2
+</span><span>
+</span><span style="color:#bb4188;">print</span><span style="color:#3787c7;">(</span><span>f</span><span style="color:#090909;">&#39;</span><span style="color:#3787c7;">{</span><span>a=</span><span style="color:#3787c7;">} {</span><span>b=</span><span style="color:#3787c7;">}</span><span style="color:#090909;">&#39;</span><span style="color:#3787c7;">) </span><span style="color:#606e7c;"># a=0.3 b=0.30000000000000004
+</span><span>
+</span><span style="color:#bb4188;">print</span><span style="color:#3787c7;">(</span><span>a == b</span><span style="color:#3787c7;">)
+</span><span style="color:#606e7c;"># false
+</span><span>
+</span><span style="color:#bb4188;">print</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">abs</span><span style="color:#3787c7;">(</span><span>a - b</span><span style="color:#3787c7;">) </span><span>&lt; sys</span><span style="color:#090909;">.</span><span>float_info</span><span style="color:#090909;">.</span><span>epsilon</span><span style="color:#3787c7;">)
+</span><span style="color:#606e7c;"># true
+</span></code></pre>
+<h4 id="epsilon-in-javascript"><a class="zola-anchor" href="#epsilon-in-javascript" aria-label="Anchor link for: epsilon-in-javascript">🔗</a>Epsilon in JavaScript</h4>
+<p>Epsilon in JavaScript is represented by <code>Number.EPSILON</code></p>
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="js,result" data-slug-hash="rNvpOGj" data-preview="true" data-editable="true" data-user="andyprindle" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/andyprindle/pen/rNvpOGj">
+  JS Number Comparison</a> by Andrew Prindle (<a href="https://codepen.io/andyprindle">@andyprindle</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<p>Notice the value of <code>b</code>, which returns 0.30000000000000004.</p>
+<h2 id="special-values"><a class="zola-anchor" href="#special-values" aria-label="Anchor link for: special-values">🔗</a>Special values</h2>
+<p>Floating-point numbers can also represent special values like infinity and negative infinity. With integer math dividing by 0 will just raise an exception, however with floating-point math you will instead get <code>infinity</code>. Trying <code>-10.0 / 0.0</code> in Python will actually still raise an exception, however in many other languages, like JavaScript, it will happily return <code>-infinity</code>. Notice how it's <em>negative</em> infinity, because we divided by -10.</p>
+<p>Likewise, trying <code>0.0 / 0.0</code> will produce another special value called <code>NaN</code> which stands for &quot;Not a Number&quot;. These can propagate through math operations, which may cause some confusion to programmers who expect invalid operations to just throw an error. So <code>0.0 / 0.0 + 2.0 + 10.0</code> will still give us a <code>NaN</code> - the 0 divided by 0 &quot;poisoned&quot; it so that all following operations in the computation also produce <code>NaN</code>. There are also two types of <code>NaN</code>, but I won't get into that here.</p>
+<p>Here are some more examples of surprising behavior in JavaScript:</p>
+<p class="codepen" data-height="600" data-theme-id="dark" data-default-tab="js,result" data-slug-hash="poVpjVy" data-preview="true" data-editable="true" data-user="andyprindle" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/andyprindle/pen/poVpjVy">
+  Untitled</a> by Andrew Prindle (<a href="https://codepen.io/andyprindle">@andyprindle</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<p></p>
+<h2 id="performance"><a class="zola-anchor" href="#performance" aria-label="Anchor link for: performance">🔗</a>Performance</h2>
+<p>Performance is, IMHO, the least important aspect of floating-point numbers for most programmers. However, if you don't need decimal numbers you can get a small performance benefit by using integers. It should be noted that this rarely makes a significant difference - most instructions happen very fast regardless of whether they use integer or floating-point numbers.</p>
+<p>Most modern processors have a <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Floating-point_unit">Floating-point unit</a> that is dedicated to working with floating-point numbers. In modern processors those floating-point processing units are fairly efficient, but there is still a performance penalty.</p>
+<p>Even casting a floating-point number to an integer number can affect performance. This is especially important when dealing with pointer arithmetic and array indexes, which require integers.</p>
+<h3 id="vector-instructions"><a class="zola-anchor" href="#vector-instructions" aria-label="Anchor link for: vector-instructions">🔗</a>Vector Instructions</h3>
+<p>To help with performance issues processors introduced special, low-level, vector instruction sets, like SSE and AVX, that are able to perform operations on multiple numbers at once. This is actually a type of parallel programming.</p>
+<p>For example, if you wanted to multiple the following vectors of numbers together, you would normally loop from <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Terminology"><dfn title="A range including 0 but excluding 4">[0..4)</dfn></a> and multiply corresponding elements, like:</p>
+<pre data-lang="javascript" style="background-color:#f6f8fa;color:#000000;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>let a = [</span><span style="color:#bb4188;">10</span><span style="color:#090909;">, </span><span style="color:#bb4188;">20</span><span style="color:#090909;">, </span><span style="color:#bb4188;">30</span><span style="color:#090909;">, </span><span style="color:#bb4188;">40</span><span>]</span><span style="color:#090909;">;
+</span><span>let b = [</span><span style="color:#bb4188;">4</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span>]</span><span style="color:#090909;">;
+</span><span>let result = []</span><span style="color:#090909;">;
+</span><span>
+</span><span style="color:#0077aa;">for</span><span>(i in [</span><span style="color:#bb4188;">0</span><span style="color:#090909;">,</span><span style="color:#bb4188;">1</span><span style="color:#090909;">,</span><span style="color:#bb4188;">2</span><span style="color:#090909;">,</span><span style="color:#bb4188;">3</span><span>]) </span><span style="color:#090909;">{
+</span><span>  result[i] = a[i] * b[i]</span><span style="color:#090909;">;
+</span><span style="color:#090909;">}
+</span><span>
+</span><span>console</span><span style="color:#090909;">.</span><span style="color:#bb4188;">log</span><span>(result)</span><span style="color:#090909;">; 
+</span><span style="color:#606e7c;">// [40, 60, 60, 40]
+</span></code></pre>
+<p>Instead, vector instructions would simultaneously multiply the first number from each array, then the second number from each, and so on. Vector instructions work on specific sizes, often 128 or 256 bits of data. If you are using 256bit vector types, you can store either 8 <code>single</code>s or 4 <code>double</code>s. The following pseudo-code represents what is happening better:</p>
+<pre data-lang="c" style="background-color:#f6f8fa;color:#000000;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#3787c7;">[</span><span style="color:#bb4188;">10</span><span style="color:#090909;">, </span><span style="color:#bb4188;">20</span><span style="color:#090909;">, </span><span style="color:#bb4188;">30</span><span style="color:#090909;">, </span><span style="color:#bb4188;">40</span><span style="color:#3787c7;">] </span><span>* </span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">4</span><span style="color:#090909;">, </span><span style="color:#bb4188;">3</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#090909;">, </span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">]
+</span></code></pre>
+<p>There is no need for an explicit loop, it just takes each element and multiplies them together. Each multiplication is happening at the same time, within the same processor instruction. This is very helpful for improving performance, the processor doesn't need to <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Instruction_cycle">fetch, decode, and execute</a> the instructions for each multiplication operation. The downsides are that the processor has to support these instructions, and explicitly using them often require a low-level language.</p>
+<h3 id="smt"><a class="zola-anchor" href="#smt" aria-label="Anchor link for: smt">🔗</a>SMT</h3>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Simultaneous_multithreading">Simultaneous multithreading</a>, or better known as Hyper-threading in Intel processors, is a technique used to improve performance under heavy multi-threaded loads. For example, SMT can take advantage of the fact that modern processors have a separate processing unit for integer operations versus floating-point operations. Each x86-64 processor core (logical processor) would be able to perform one operation on its <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit">Arithmetic logic unit</a> (ALU) and another on its <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Floating-point_unit">Floating-point unit</a> (FPU) at the same time.</p>
+<p>So in a strange way it is possible to <em>increase</em> performance by using floating-point numbers. By using multiple threads, each one performing either floating-point or integer math, you could better saturate the processor. Most programs won't benefit from this much, but computationally intensive programs may see a noticeable performance boost.</p>
+<h2 id="alternatives"><a class="zola-anchor" href="#alternatives" aria-label="Anchor link for: alternatives">🔗</a>Alternatives</h2>
+<p>Other types do exist besides the IEEE binary floating-point formats. For most applications they will work fine, however it is important to know when to reach for another data type. </p>
+<p>Some languages support decimal floating-point types like <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Decimal32_floating-point_format"><code>decimal32</code></a> and <a rel="noopener nofollow noreferrer" target="_blank" href="https://en.wikipedia.org/wiki/Decimal64_floating-point_format"><code>decimal64</code></a>. The decimal floating-point numbers are more accurate this way and are a better fit when precision is required, like for financial applications.</p>
+<p>There are also libraries that have arbitrary precision, like <a rel="noopener nofollow noreferrer" target="_blank" href="https://mpmath.org/"><code>mpmath</code></a> for Python, which can store extremely precise numbers at the expense of memory and computation speed.  These are often used a last resort when other standard types are not precise enough.</p>
+
+    </article>
+
+            </section>
+        </div>
+        
+
+<footer>
+    <ul>
+        
+                    <li>&copy; 2023 Andrew Prindle</li>
+                    <li>
+                    <a href="https://github.com/vishusandy/vishusandy.github.io" target="_blank"
+                        rel="noreferrer noopener" >Source</a>
+                    </li><li>
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/floats_vs_ints.md" target="_blank" rel="noreferrer noopener">
+                Updated <time title="Updated" class="updated" datetime="2022-11-28">2022-11-28</time></a>
+        </li>
+    </ul>
+</footer>
+
+
+    </body>
+</html>

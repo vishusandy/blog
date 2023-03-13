@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <title>Vishus Blog - Creating my Blog with Zola</title>
+        <link rel="stylesheet" href='https://vishusandy.github.io/base.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+<link rel="stylesheet" href='https://vishusandy.github.io/code.css'>
+<link rel="stylesheet" href='https://vishusandy.github.io/article.css'>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+
+
+        
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        
+
+<script src="https://vishusandy.github.io/js/top.js"></script>
+<noscript>
+    <style>
+        #top-link {
+            opacity: 1;
+        }
+    </style>
+</noscript>
+
+
+    </head>
+    <body id="top">
+        
+<header>
+    <div class="title">
+        <a href="https://vishusandy.github.io" title="Home" alt="Homepage">Vishus Blog</a>
+    </div>
+    
+    
+    <div class="menu">
+        <a href="#top" id="top-link" title="Go to top of page">Top</a>
+    </div>
+    
+    
+    
+    <div class="links">
+        <ul>
+            <li><a href="https://vishusandy.github.io/pages/links">Links</a></li><li><a href="https://social.linux.pizza/@vishus" target="_blank" rel="me noreferrer noopener" aria-label="Open Mastodon profile in a new window"><i class="link-icon fa-brands fa-mastodon" alt="Go to my Mastodon profile" title="My Mastodon profile"></i></a></li><li><a href="https://github.com/vishusandy" target="_blank" rel="noreferrer noopener"><i class="link-icon fa-brands fa-github" alt="Go to my GitHub profile" title="My GitGub"></i></a></li>
+        </ul>
+    </div>
+    
+</header>
+
+        
+    <h1 class="title">
+        Creating my Blog with Zola
+    </h1>
+    <div class="subtitle">
+        <div class="created no-update"><time title="Created" class="created" datetime="2023-01-24">2023-01-24</time></div>
+    </div>
+        
+
+
+<section class="toc" id="toc">
+    <div class="toc">
+        <h5>Table of Contents</h5>
+        <hr>
+        <ul>
+            <li>
+                <a href="https://vishusandy.github.io/zola-blog/#overview">Overview</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/zola-blog/#zola">Zola</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/zola-blog/#custom-theme">Custom Theme</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/zola-blog/#github-pages">GitHub Pages</a>
+                
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+        <div class="container">
+            <section class="section">
+                
+    <article id="top" class="markdown-body">
+        <h2 id="overview"><a class="zola-anchor" href="#overview" aria-label="Anchor link for: overview">🔗</a>Overview</h2>
+<p>Updating a website manually is pain.  Static site generators solve this and also allow your website to be hosted for free on services like GitHub/GitLab pages, Vercel, or Netlify.</p>
+<p>While the <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vishusandy/vishusandy.github.io">source</a> for this blog is on GitHub the details behind it warrant some explanation.  Hopefully this will be useful to anyone looking to start a tech/dev blog.</p>
+<h2 id="zola"><a class="zola-anchor" href="#zola" aria-label="Anchor link for: zola">🔗</a>Zola</h2>
+<p>I chose <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.getzola.org/">Zola</a> as a static site generator because it comes with all of the features I could want: generating a table of contents, a search feature, syntax highlighting, RSS, and a live preview while you're working.  I have yet to use them all.</p>
+<p>It took a little while for me to learn how to use Zola but after that I started to like it a lot.  I have some gripes about their documentation but overall the program itself is very nice.</p>
+<p>Zola is pretty easy to install; their <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.getzola.org/documentation/getting-started/installation/">Installation</a> page has many options.  Unfortunately the package for Fedora is fairly old so I had to use their <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/getzola/zola/releases">pre-built binares</a>, otherwise things wouldn't work correctly in the live preview.</p>
+<p>A simple <code>zola init</code> gets you started with a blank template.  Then use <code>zola serve --open</code> to preview your work as you go.  Finally you can start adding content in the <code>/content</code> directory or adding themes.  See the <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.getzola.org/documentation/content/overview/">Content Overview</a> and <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.getzola.org/documentation/themes/installing-and-using-themes/">Themes</a> pages for more details.</p>
+<h2 id="custom-theme"><a class="zola-anchor" href="#custom-theme" aria-label="Anchor link for: custom-theme">🔗</a>Custom Theme</h2>
+<p>I opted to bypass the easy route and instead choose to make a plain looking theme aimed at tech/dev blogs.  You can find  <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vishusandy/vishus_zola">the theme</a> on my GitHub with screenshots and installation instructions.</p>
+<p>Some of the things I wanted:</p>
+<ul>
+<li>dead simple aesthetic (focus on content not the theme)</li>
+<li>mobile friendly design</li>
+<li>loads quickly</li>
+<li>support for math in markdown (I prefer <a rel="noopener nofollow noreferrer" target="_blank" href="https://katex.org/">KaTeX</a>)</li>
+<li>table of contents</li>
+</ul>
+<p>To me those are the base requirements for a tech blog theme so I also added:</p>
+<ul>
+<li>if the page has been modified from the original verison it should show a link to the changes (if using Git)</li>
+<li><a rel="noopener nofollow noreferrer" target="_blank" href="https://fontawesome.com/">Font Awesome</a> - to display links to my GitHub and Mastodon as icons</li>
+<li>a link to scroll to the top of the page</li>
+<li>header and footer with custom links that can be edited in the <code>config.toml</code> instead of having to edit the templates.</li>
+</ul>
+<p>Fortunately I was able to make all of that happen.  I will spare the details of creating the theme, but I will say it took a lot of effort.  Just because the theme &quot;looks simple&quot; doesn't mean it is behind the scenes.  My goal was to make it as flexible as possible without sacrificing features.</p>
+<p>I ended up using template macros to build the header and footer.  This allows both the section and article templates to reuse that code.</p>
+<p>You can find the custom theme <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vishusandy/vishus_zola">here</a> along with installation instructions.</p>
+<h2 id="github-pages"><a class="zola-anchor" href="#github-pages" aria-label="Anchor link for: github-pages">🔗</a>GitHub Pages</h2>
+<p>I didn't want to manually upload changes, so I created a GitHub workflow to take the content from my Git repo and build the site everytime I push a change.  You can find the file I use <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vishusandy/vishusandy.github.io/blob/main/.github/workflows/main.yml">here</a>.</p>
+<p>To set this up I went to my repo settings in GitHub, then selected &quot;Deploy from a branch&quot;, selected the 'gh-pages' branch (with '/root' as the base folder).</p>
+
+    </article>
+
+            </section>
+        </div>
+        
+
+<footer>
+    <ul>
+        
+                    <li>&copy; 2023 Andrew Prindle</li>
+                    <li>
+                    <a href="https://github.com/vishusandy/vishusandy.github.io" target="_blank"
+                        rel="noreferrer noopener" >Source</a>
+                    </li>
+    </ul>
+</footer>
+
+
+    </body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <title>Vishus Blog - How to Draw a Circle</title>
+        <link rel="stylesheet" href='https://vishusandy.github.io/base.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+<link rel="stylesheet" href='https://vishusandy.github.io/code.css'>
+<link rel="stylesheet" href='https://vishusandy.github.io/article.css'>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+
+
+        
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        
+
+<script src="https://vishusandy.github.io/js/top.js"></script>
+<noscript>
+    <style>
+        #top-link {
+            opacity: 1;
+        }
+    </style>
+</noscript>
+
+
+    </head>
+    <body id="top">
+        
+<header>
+    <div class="title">
+        <a href="https://vishusandy.github.io" title="Home" alt="Homepage">Vishus Blog</a>
+    </div>
+    
+    
+    <div class="menu">
+        <a href="#top" id="top-link" title="Go to top of page">Top</a>
+    </div>
+    
+    
+    
+    <div class="links">
+        <ul>
+            <li><a href="https://vishusandy.github.io/pages/links">Links</a></li><li><a href="https://social.linux.pizza/@vishus" target="_blank" rel="me noreferrer noopener" aria-label="Open Mastodon profile in a new window"><i class="link-icon fa-brands fa-mastodon" alt="Go to my Mastodon profile" title="My Mastodon profile"></i></a></li><li><a href="https://github.com/vishusandy" target="_blank" rel="noreferrer noopener"><i class="link-icon fa-brands fa-github" alt="Go to my GitHub profile" title="My GitGub"></i></a></li>
+        </ul>
+    </div>
+    
+</header>
+
+        
+    <h1 class="title">
+        How to Draw a Circle
+    </h1>
+    <div class="subtitle">
+        <div class="created no-update"><time title="Created" class="created" datetime="2022-09-23">2022-09-23</time></div>
+    </div><p>Recently I spent some time working on how to draw circles and arcs.  I needed to draw antialiased arcs, partial <dfn id="annulus-def" title="Annulus: a filled donut shape">annuli</dfn>, and antialiased circles but the library I was using didn't support them.  Graphics programming is interesting, and since there's nothing programmers love more than an interesting problem it was a great excuse to have a little fun.</p>
+        
+
+
+<section class="toc" id="toc">
+    <div class="toc">
+        <h5>Table of Contents</h5>
+        <hr>
+        <ul>
+            <li>
+                <a href="https://vishusandy.github.io/how-to-draw-a-circle/#considerations-for-drawing-a-circle">Considerations for Drawing a Circle</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#solving-for-y">Solving for y</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/how-to-draw-a-circle/#quadrants">Quadrants</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/how-to-draw-a-circle/#octants">Octants</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#translating-octants">Translating Octants</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#looping-over-octants">Looping Over Octants</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#drawing-a-full-circle-with-one-octant">Drawing a full circle with one octant</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/how-to-draw-a-circle/#antialiasing">Antialiasing</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/how-to-draw-a-circle/#optimized-algorithms">Optimized Algorithms</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#midpoint-circle-algorithm">Midpoint Circle Algorithm</a>
+                    </li>
+                    <li>
+                        <a href="https://vishusandy.github.io/how-to-draw-a-circle/#bresenham-s-algorithm">Bresenham&#x27;s Algorithm</a>
+                    </li>
+                    </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+        <div class="container">
+            <section class="section">
+                
+    <article id="top" class="markdown-body">
+        <!-- 
+Recently I spent some time working on how to draw circles and arcs.  I needed to draw antialiased arcs, partial <dfn id="annulus-def" title="Annulus: a filled donut shape">annuli</dfn>, and antialiased circles but the library I was using didn't support them.  Graphics programming is interesting, and since there's nothing programmers love more than an interesting problem it was a great excuse to have a little fun.
+-->
+<h2 id="considerations-for-drawing-a-circle"><a class="zola-anchor" href="#considerations-for-drawing-a-circle" aria-label="Anchor link for: considerations-for-drawing-a-circle">🔗</a>Considerations for Drawing a Circle</h2>
+<p>The equation for a circle is: </p>
+<p>$$
+x^2 + y^2 = r^2
+$$</p>
+<p>There are a few things to note here:</p>
+<ol>
+<li>
+<p>The actual values for <code>x</code> and <code>y</code> will be floating-point numbers.  Unfortunately it's difficult to represent a fraction of a pixel in a normal image, so we'll have to somehow choose which values to draw.</p>
+</li>
+<li>
+<p>The variables are squared, so negative values are lost.  If you think of the circle as being divided into quadrants each quadrant will still use the same numbers <code>x</code> and <code>y</code> but with either a positive or negative value for each coordinate.</p>
+</li>
+<li>
+<p>The above formula for a circle assumes it's centered at (0, 0), however when drawing onto an image (0, 0) represents the top-left corner of the image and not the center.  For the final pixel locations in the image we will have to add the desired center coordinates.</p>
+</li>
+</ol>
+<p>If we have a circle with a radius of 10 and we use <code>x = 5</code> we get:</p>
+<p>$$
+y^2 = r^2 - x^2
+\\
+y^2 = 10^2 - 5^2
+\\
+y^2 = 100 - 25
+\\
+y^2 = 75
+\\
+y = \sqrt{75}
+\\
+y = 8.66
+$$</p>
+<p>So the actual point is (5, 8.66) but we need a whole number to put it onto an image, so we round to (5, 9). This is is important to remember: we are <em>approximating</em> the integer coordinates; the pixel drawn on the image doesn't represent the exact point on the circle.</p>
+<p>As an example consider the following image:</p>
+
+<figure><figcaption class="title">Pixel coordinates</figcaption>
+    <a href="../assets/draw-a-circle/pixel_coordinates.png">
+        <img src="../assets/draw-a-circle/pixel_coordinates.png"
+             title="Pixel locations vs circle coordinates" 
+             alt="Grid showing how points in a circle land somewhere between two pixels" 
+             class="img-center">
+    </a>
+
+    <figcaption>The grid lines represent exact integer coordinates.  The coordinates in the circle are floating-points numbers so the actual points usually lie somewhere between two pixels.</figcaption>
+</figure>
+<h3 id="solving-for-y"><a class="zola-anchor" href="#solving-for-y" aria-label="Anchor link for: solving-for-y">🔗</a>Solving for <code>y</code></h3>
+<p>In order to draw a circle we need somewhere to start drawing and to increment either the <code>x</code> or<code> y</code> value inside a loop.  A first attempt might start at <code>x = -radius</code> and loop until <code>x == radius</code>, finding the <code>y</code> value at each step.  Here is the python code:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">from </span><span>PIL </span><span style="color:#0077aa;">import </span><span>Image</span><span style="color:#090909;">, </span><span>ImageColor
+</span><span style="color:#0077aa;">from </span><span>math </span><span style="color:#0077aa;">import </span><span style="color:#bb4188;">pow</span><span style="color:#090909;">, </span><span>sqrt
+</span><span>
+</span><span style="color:#606e7c;"># create a new 400x400 image with a white background
+</span><span>img = Image</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&#39;</span><span style="color:#669900;">RGB</span><span style="color:#090909;">&#39;, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">400</span><span style="color:#090909;">, </span><span style="color:#bb4188;">400</span><span style="color:#3787c7;">)</span><span style="color:#090909;">, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#3787c7;">))
+</span><span>
+</span><span>color = </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">)  </span><span style="color:#606e7c;"># color to draw - red
+</span><span>c = </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">200</span><span style="color:#090909;">, </span><span style="color:#bb4188;">200</span><span style="color:#3787c7;">)  </span><span style="color:#606e7c;"># center coordinates
+</span><span>r = </span><span style="color:#bb4188;">190  </span><span style="color:#606e7c;"># radius
+</span><span>
+</span><span>x = -r  </span><span style="color:#606e7c;"># initial x value (center of circle
+</span><span style="color:#606e7c;"># remember the circle is centered at (0,0)
+</span><span>
+</span><span style="color:#0077aa;">while </span><span>x &lt; r</span><span style="color:#3787c7;">:
+</span><span>    </span><span style="color:#606e7c;"># calculate y for the current x value
+</span><span>    y = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># draw a pixel at the (x, y) coordinates
+</span><span>    </span><span style="color:#606e7c;">#   remember to add center since the circle is centered at (0,0)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># increment x
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">naive_circle_attempt.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>The above code produces:</p>
+
+<figure>
+    <a href="../assets/draw-a-circle/naive_circle_attempt.png">
+        <img src="../assets/draw-a-circle/naive_circle_attempt.png"
+             title="Circle attempt" 
+             alt="A circle with vertical gaps between pixels on the left and right sides" 
+             class="img-border img-center">
+    </a>
+
+    <figcaption>Notice the vertical gaps between pixels on the left and right sides</figcaption>
+</figure>
+<p>This zoomed-in image gives us a better look at the sides:</p>
+
+<figure>
+    <a href="../assets/draw-a-circle/naive_circle_attempt_zoomed.png">
+        <img src="../assets/draw-a-circle/naive_circle_attempt_zoomed.png"
+             title="Zoomed in circle attempt" 
+             alt="Zoomed in view of a circle with vertical gaps between pixels on the right side" 
+             class="img-border img-center">
+    </a>
+
+    <figcaption>One pixel is plotted for every x coordinate</figcaption>
+</figure>
+<p>This isn't exactly what we want but its close.  Let's examine what went wrong.</p>
+<h5 id="why-is-there-space-between-some-of-the-pixels"><a class="zola-anchor" href="#why-is-there-space-between-some-of-the-pixels" aria-label="Anchor link for: why-is-there-space-between-some-of-the-pixels">🔗</a>Why is there space between some of the pixels?</h5>
+<ul>
+<li>Notice how there was always a pixel drawn from left to right (along the <code>x</code> axis) but vertically we missed a few.  This happens because we are always incrementing <code>x</code> inside the loop, and then solving for <code>y</code>.  So we only draw one pixel for each value of <code>x</code>, so there is only one <code>y</code> value for every <code>x</code> value.  If you look at an actual circle you will see we need multiple <code>y</code> values for certain <code>x</code> values.</li>
+</ul>
+<h5 id="but-why-are-the-gaps-on-just-the-right-side"><a class="zola-anchor" href="#but-why-are-the-gaps-on-just-the-right-side" aria-label="Anchor link for: but-why-are-the-gaps-on-just-the-right-side">🔗</a>But why are the gaps on just the right side?</h5>
+<ul>
+<li>If you split the circle into eight pieces (octants) one axis will always increment and the other axis will <em>sometimes</em> increment.  In each octant one axis will always move faster than the other.  In the above image you can see that when the <code>y</code> axis starts moving faster than <code>x</code> we start seeing gaps in the circle.  This is because we started in octant 7 and once we moved into octant 8 the faster direction switched, but we kept incrementing <code>x</code>.</li>
+</ul>
+<p>To solve this issue we have to know what part of the circle we are in.  The octant boundary can be found by checking to see if <code>x &lt; y</code>, and if so <code>x</code> should move faster so we increment <code>x</code> every step.  Otherwise we increment <code>y</code> every step.  The value we are always incrementing can be referred to as the <strong>fast</strong> value, since it moves quicker, and the other axis is the <strong>slow</strong> value.  In order to actually draw a full circle we have to break it down into smaller sections.  First let's look at how quadrants can help us. </p>
+<h2 id="quadrants"><a class="zola-anchor" href="#quadrants" aria-label="Anchor link for: quadrants">🔗</a>Quadrants</h2>
+<p>Since the formula for a circle only gives us positive values (due the squaring) we will have to break up our circle into four slices, or quadrants.  The quadrants will have the same numbers for (x, y) coordinates but differ in being negative or positive.</p>
+<p>Squaring <code>x</code> and <code>y</code> will give us a positive value regardless of whether the original value was negative or positive.  To fix this we have to translate the coordinates depending on the quadrant.  The different values for the quadrants are: (x, y) (x, -y), (-x, -y) and (-x, y).</p>
+<p>Translating the value of (5, 9) from one quadrant to the others would give: </p>
+<ul>
+<li>(5, 9)</li>
+<li>(5, -9)</li>
+<li>(-5, -9)</li>
+<li>(-5, 9)</li>
+</ul>
+<p>Here is some Python code to draw a circle by translating each pixel into all 4 quadrants:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0
+</span><span>y = r
+</span><span>
+</span><span style="color:#606e7c;"># iterate over octant 7 and translate the coordinates for all 4 quadrants
+</span><span style="color:#0077aa;">while </span><span>x &lt; y</span><span style="color:#3787c7;">:
+</span><span>    y = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># draw octant 7: (x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 2: (x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 3: (-x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 6: (-x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span><span>
+</span><span style="color:#606e7c;"># iteratve over octant 8 and translate the coordinates for all 4 quadrants
+</span><span style="color:#0077aa;">while </span><span>y != </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">:
+</span><span>    x = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>y</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># draw octant 8: (x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 1: (x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 4: (-x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># # draw octant 5: (-x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    y = y - </span><span style="color:#bb4188;">1
+</span><span>
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">simple_circle_by_quadrant.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<h2 id="octants"><a class="zola-anchor" href="#octants" aria-label="Anchor link for: octants">🔗</a>Octants</h2>
+<p>The above code actually works on two octants, by switching which value is the fast value.  We could however just draw one octant and mirror it to the other 7.</p>
+<h3 id="translating-octants"><a class="zola-anchor" href="#translating-octants" aria-label="Anchor link for: translating-octants">🔗</a>Translating Octants</h3>
+<p>You will still use the positive/negative values from the quadrants but also translate those coordinates into another octant.  Within a quadrant, one octant will have coordinates of (x, y) and the other will have (y, x).  So (5,9) would become (9, 5).  We can use this to mirror one octant to the other octant, which just rotates it by 45°.</p>
+<blockquote>
+<p>Note: swapping x and y to rotate 45° only works with a center of (0, 0).  If you need to convert between an image's actual coordinates you will have to subtract out the center coordinates.</p>
+</blockquote>
+
+<figure><figcaption class="title">Octants</figcaption>
+    <a href="../assets/draw-a-circle/octants.png">
+        <img src="../assets/draw-a-circle/octants.png"
+             title="Octants" 
+             alt="Diagram of octant numbering for a circle.  Octant 1 is at the bottom of the top-right quadrant; octants move counter-clockwise." 
+             class="img-center">
+    </a>
+</figure>
+<h3 id="looping-over-octants"><a class="zola-anchor" href="#looping-over-octants" aria-label="Anchor link for: looping-over-octants">🔗</a>Looping Over Octants</h3>
+<p>To actually draw a circle we will want to loop over all of the pixels for an octant and translate those coordinates to the other 7.</p>
+<h4 id="while-loop"><a class="zola-anchor" href="#while-loop" aria-label="Anchor link for: while-loop">🔗</a>While Loop</h4>
+<p>To loop over a single octant you can use:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0
+</span><span>y = r
+</span><span style="color:#0077aa;">while </span><span>x &lt; y</span><span style="color:#3787c7;">:
+</span><span>    y = </span><span style="color:#606e7c;"># calculate y
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span></code></pre>
+<blockquote>
+<p>Note: each quadrant will have different combination of negative and positive values for <code>x</code> and <code>y</code>.  You may have to use <code>-x</code> or <code>-y</code> according to which quadrant you want to work in.  Additionally, the fast and slow values will either increment or decrement depending on the octant.</p>
+</blockquote>
+<h4 id="for-loop"><a class="zola-anchor" href="#for-loop" aria-label="Anchor link for: for-loop">🔗</a>For Loop</h4>
+<p>Or, you could also use a <code>for</code> loop to draw from 0 until the end of the octant.  The 45° point can be calculated by <code>round(r / sqrt(2))</code>:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0
+</span><span style="color:#0077aa;">for </span><span>x </span><span style="color:#0077aa;">in </span><span style="color:#bb4188;">range</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>r / sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">))):
+</span><span>    y = </span><span style="color:#606e7c;"># calculate y
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span></code></pre>
+<h3 id="drawing-a-full-circle-with-one-octant"><a class="zola-anchor" href="#drawing-a-full-circle-with-one-octant" aria-label="Anchor link for: drawing-a-full-circle-with-one-octant">🔗</a>Drawing a full circle with one octant</h3>
+<p>To draw a full circle by calculating just one octant you would take the (x, y) coordinates, and use all of the possible negative and positive combinations of (x, y) and (y, x).  You take the <code>x</code> and <code>y</code> values and translate for each octant.</p>
+<p>Here is some python code:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0 </span><span style="color:#606e7c;"># center of circle
+</span><span>y = r </span><span style="color:#606e7c;"># bottom of circle
+</span><span>
+</span><span style="color:#606e7c;"># iterate over octant 7 and translate the coordinates for all 4 quadrants
+</span><span style="color:#0077aa;">while </span><span>x &lt; y</span><span style="color:#3787c7;">:
+</span><span>    </span><span style="color:#606e7c;"># draw octant 7: (x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 2: (x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 3: (-x, -y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 6: (-x, y)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 8: (y, x)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># draw octant 1: (y, -x)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># # draw octant 4: (-y, -x)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>-x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#606e7c;"># # # draw octant 5: (-y, x)
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>-y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span><span>    y = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)))
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">simple_circle_by_octant.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<h2 id="antialiasing"><a class="zola-anchor" href="#antialiasing" aria-label="Anchor link for: antialiasing">🔗</a>Antialiasing</h2>
+<p>If <code>x</code> is the fast coordinate, we can use the <code>floor()</code> and <code>ceiling()</code> of <code>y</code> to get the two <code>y</code> coordinates to use with <code>x</code>. With an <code>x</code> value of 5 we can calculate <code>y = 8.66</code>. Using <code>floor(8.66)</code> and <code>ceiling(8.66)</code> we get the coordinates (5, 8) and (5, 9).</p>
+<p>In order to make it look smooth we take an opacity of 100% and split it between the two pixels.  If the pixel lies exactly on the point it will have an opacity of 100% and the other will have 0%.</p>
+<p>The fractional part of 8.66 is 0.66, which will be the opacity used for one of the pixels.  By subtracting that from 1, like  <code>1.0 - 0.66</code>, we will get the second opacity, giving us opacities of 0.66 and 0.34.</p>
+<p>However, we don't want to just overwrite the colors at the given coordinates, we want to blend them in to the existing colors.  I won't cover alpha compositing here, but the idea is simple enough: take two colors and output one color in a way that blends them together to give a look of partial transparency.</p>
+<p>Below is some python code to draw a single antialiased octant.  For simplicity I will leave out translating to the other octants.  Also note that the code creates a new image in the loop which is then blended into the existing image.  This step is done to avoid writing a custom function for alpha compositing for the two pixels.  If your image drawing library supports blending two pixels together (instead of just whole images) you should use that here instead.</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0
+</span><span>y = r
+</span><span>
+</span><span style="color:#606e7c;"># iterate over octant 7
+</span><span style="color:#0077aa;">for </span><span>x </span><span style="color:#0077aa;">in </span><span style="color:#bb4188;">range</span><span style="color:#3787c7;">(</span><span>ffd</span><span style="color:#3787c7;">):
+</span><span>    </span><span style="color:#606e7c;"># create a new image to blend img with
+</span><span>    img2 = Image</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&#39;</span><span style="color:#669900;">RGBA</span><span style="color:#090909;">&#39;, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">400</span><span style="color:#090909;">, </span><span style="color:#bb4188;">400</span><span style="color:#3787c7;">)</span><span style="color:#090909;">, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># get the exact value of y
+</span><span>    y = sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">))
+</span><span>    </span><span style="color:#606e7c;"># get the fractional portion of y
+</span><span>    </span><span style="color:#3787c7;">(</span><span>fract</span><span style="color:#090909;">, </span><span style="color:#cc5e91;">_</span><span style="color:#3787c7;">) </span><span>= modf</span><span style="color:#3787c7;">(</span><span>sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># get the two closest pixel coordinates for y
+</span><span>    y1 = ceil</span><span style="color:#3787c7;">(</span><span>y</span><span style="color:#3787c7;">)
+</span><span>    y2 = floor</span><span style="color:#3787c7;">(</span><span>y</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># split the full opacity (255) between the two pixels
+</span><span>    o1 = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255 </span><span>* fract</span><span style="color:#3787c7;">)
+</span><span>    o2 = </span><span style="color:#bb4188;">255 </span><span>- o1
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># draw both pixels in octant 7
+</span><span>    img2</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y1 + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span style="color:#3787c7;">(</span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>o1</span><span style="color:#3787c7;">))
+</span><span>    img2</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y2 + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span style="color:#3787c7;">(</span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>o2</span><span style="color:#3787c7;">))
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># blend into existing image
+</span><span>    img</span><span style="color:#090909;">.</span><span>alpha_composite</span><span style="color:#3787c7;">(</span><span>img2</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">simple_antialiased_octant.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>And here's the results up close:</p>
+
+<figure>
+    <a href="../assets/draw-a-circle/antialiased_octant.png">
+        <img src="../assets/draw-a-circle/antialiased_octant.png"
+             title="Antialiased octant" 
+             alt="A single octant of a circle drawn with antialiasing to create a smooth look" 
+             class="img-border img-center">
+    </a>
+
+    <figcaption>Two adjacent pixels are drawn for each x coordinate.  They are blended into the image based on their opacities.  This better represents fractional coordinates on a pixel grid.</figcaption>
+</figure>
+<p>It should be noted there are other ways to implement simple antialiasing besides just splitting the opacity between the two nearest pixels.  You could use other weighting schemes for opacities or patterns for choosing which pixels to use.  For example, changing the how a desired is blended into the existing color based on whether the current pixel was a horizontal/vertical step or diagonal step.  Diagonal steps have a greater distance from the last pixel than horizontal or vertical steps so you could achieve better results by changing the blending for them.  Each have advantages and disadvantages.</p>
+<p>For more code examples of antialiasing see:</p>
+<ul>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://yellowsplash.wordpress.com/2009/10/23/fast-antialiased-circles-and-ellipses-from-xiaolin-wus-concepts/">Fast, Antialiased Circles and Ellipses from Xiaolin Wu's concepts | Yellow Splash</a></p>
+</li>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="http://www.landkey.net/d/antialiased/wu4_RF">Anti-Aliased Algorithms - Landkey</a></p>
+</li>
+</ul>
+<h2 id="optimized-algorithms"><a class="zola-anchor" href="#optimized-algorithms" aria-label="Anchor link for: optimized-algorithms">🔗</a>Optimized Algorithms</h2>
+<p>While the code above works, and is fairly simple, it is unfortunately less efficient for modern computers.  Squaring and especially square roots are relatively expensive operations for processors.  Fortunately this can be sped up using different algorithms.</p>
+<h3 id="midpoint-circle-algorithm"><a class="zola-anchor" href="#midpoint-circle-algorithm" aria-label="Anchor link for: midpoint-circle-algorithm">🔗</a>Midpoint Circle Algorithm</h3>
+<p>The Midpoint Circle algorithm allows you to draw a circle without more expensive square root calculations.  It accomplishes this by testing the half-way point between two pixels to see if it is inside or outside of the circle.  It uses the formula for a circle:</p>
+<p>$$ x^2 + y^2 - r^2 =0 $$</p>
+<p>In each iteration of the loop it uses the last values of <code>x</code> and <code>y</code> and add (or subtract) 1 to the fast value, and 0.5 to the slow value and solves the equation above.</p>
+<p>So if we're always incrementing <code>x</code> (the fast value) by 1 and then sometimes decrementing <code>y</code> (the slow value), we would get something like this In python:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>d = </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x + </span><span style="color:#bb4188;">1</span><span style="color:#090909;">.</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>+ </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>y - </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">5</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)
+</span><span>inside = d &lt;= </span><span style="color:#bb4188;">0 </span><span style="color:#606e7c;"># store whether `d &lt;= 0` is true or false
+</span></code></pre>
+<p>where <code>x</code> and <code>y</code> are the previously drawn values.</p>
+<p>At each step we use the following to check whether the value, referred to here as <code>d</code>, is greater than or less than 0:
+$$ x^2 + y^2 - r^2 = 0 $$ </p>
+<p>If <code>d</code> is less than 0 it lies inside the circle, and if it is is greater than 0 it lies outside the circle.  This is how we choose whether or not to move in the slow direction.  If it is less than 0 we do not move in the slow direction, just the fast direction.</p>
+<p>Below is some python code to draw a single octant.  The other octants can be drawn using the same technique above to translate the octant's coordinates.</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">from </span><span>PIL </span><span style="color:#0077aa;">import </span><span>Image
+</span><span style="color:#0077aa;">from </span><span>math </span><span style="color:#0077aa;">import </span><span style="color:#bb4188;">pow
+</span><span>
+</span><span style="color:#606e7c;"># create a new 400x400 image with a white background
+</span><span>img = Image</span><span style="color:#090909;">.</span><span>new</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&#39;</span><span style="color:#669900;">RGB</span><span style="color:#090909;">&#39;, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">400</span><span style="color:#090909;">, </span><span style="color:#bb4188;">400</span><span style="color:#3787c7;">)</span><span style="color:#090909;">, </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">255</span><span style="color:#3787c7;">))
+</span><span>
+</span><span>color = </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">255</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">)  </span><span style="color:#606e7c;"># color to draw - red
+</span><span>c = </span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">200</span><span style="color:#090909;">, </span><span style="color:#bb4188;">200</span><span style="color:#3787c7;">)  </span><span style="color:#606e7c;"># center coordinates
+</span><span>r = </span><span style="color:#bb4188;">150  </span><span style="color:#606e7c;"># radius
+</span><span>
+</span><span>
+</span><span>x = </span><span style="color:#bb4188;">0
+</span><span>y = r
+</span><span style="color:#0077aa;">while </span><span>x &lt; y</span><span style="color:#3787c7;">:
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>
+</span><span>    </span><span style="color:#606e7c;"># test whether fast+1 and slow-0.5 is inside or outside the circle
+</span><span>    p = </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>x + </span><span style="color:#bb4188;">1</span><span style="color:#090909;">.</span><span style="color:#bb4188;">0</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>+ </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>y - </span><span style="color:#bb4188;">0</span><span style="color:#090909;">.</span><span style="color:#bb4188;">5</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">) </span><span>- </span><span style="color:#bb4188;">pow</span><span style="color:#3787c7;">(</span><span>r</span><span style="color:#090909;">, </span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">)
+</span><span>    </span><span style="color:#0077aa;">if </span><span>p &lt;= </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">:
+</span><span>        x = x+</span><span style="color:#bb4188;">1  </span><span style="color:#606e7c;"># inside the circle - only move in the fast direction
+</span><span>    </span><span style="color:#0077aa;">else</span><span style="color:#3787c7;">:
+</span><span>        </span><span style="color:#606e7c;"># outside circle - move in both directions
+</span><span>        x = x+</span><span style="color:#bb4188;">1
+</span><span>        y = y-</span><span style="color:#bb4188;">1
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">midpoint_octant.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>This can be further optimized to avoid squaring, but this represents the basics of how the algorithm works.  I suggest taking a look at the following for more details and how to avoid squaring:</p>
+<ul>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://lectureloops.com/mid-point-circle-drawing-algorithm/">Mid-Point Circle Drawing Algorithm - LectureLoops</a></p>
+</li>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://www.javatpoint.com/computer-graphics-midpoint-circle-algorithm">Computer Graphics Midpoint Circle Algorithm - Javatpoint</a></p>
+</li>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://www.geeksforgeeks.org/mid-point-circle-drawing-algorithm/">Mid-Point Circle Drawing Algorithm - GeeksforGeeks</a></p>
+</li>
+</ul>
+<h3 id="bresenham-s-algorithm"><a class="zola-anchor" href="#bresenham-s-algorithm" aria-label="Anchor link for: bresenham-s-algorithm">🔗</a>Bresenham's Algorithm</h3>
+<p>Everything above assumes we're using floating-point variables to calculate values.  While the extra precision is convenient, it's not necessary for drawing circles.</p>
+<blockquote>
+<p>I won't cover the reasons to use integers over floating-point numbers here, but there are some important details to consider when making that choice (like Epsilon values and performance).  I will add another blog post to discuss the choice of integers over floats.</p>
+<p>It should be noted that using integers makes it more difficult to implement antialiasing, <a rel="noopener nofollow noreferrer" target="_blank" href="http://www.landkey.net/d/antialiased/wu4_RF/Content/WU/src/NoSqrt.java.htm">but not impossible</a>.</p>
+</blockquote>
+<p>Bresenham's circle algorithm is a modification of the Midpoint Circle algorithm that removes floating-point numbers, allowing it to work just with integers.  I won't explain the math here, but here is some python code demonstrating how it works:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span>x = </span><span style="color:#bb4188;">0
+</span><span>y = r
+</span><span>d = </span><span style="color:#bb4188;">3 </span><span>- </span><span style="color:#bb4188;">2 </span><span>* r  </span><span style="color:#606e7c;"># radius error
+</span><span>ffd = </span><span style="color:#bb4188;">round</span><span style="color:#3787c7;">(</span><span>r / sqrt</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">2</span><span style="color:#3787c7;">))  </span><span style="color:#606e7c;"># forty-five degree point where octants change
+</span><span>
+</span><span style="color:#606e7c;"># iterate over octant 7
+</span><span style="color:#0077aa;">for </span><span>x </span><span style="color:#0077aa;">in </span><span style="color:#bb4188;">range</span><span style="color:#3787c7;">(</span><span>ffd</span><span style="color:#3787c7;">):
+</span><span>    img</span><span style="color:#090909;">.</span><span>putpixel</span><span style="color:#3787c7;">((</span><span>x + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">]</span><span style="color:#090909;">, </span><span>y + c</span><span style="color:#3787c7;">[</span><span style="color:#bb4188;">1</span><span style="color:#3787c7;">])</span><span style="color:#090909;">, </span><span>color</span><span style="color:#3787c7;">)
+</span><span>    x = x + </span><span style="color:#bb4188;">1
+</span><span>    </span><span style="color:#0077aa;">if </span><span>d &lt;= </span><span style="color:#bb4188;">0</span><span style="color:#3787c7;">:
+</span><span>        d += </span><span style="color:#bb4188;">4 </span><span>* x + </span><span style="color:#bb4188;">6
+</span><span>    </span><span style="color:#0077aa;">else</span><span style="color:#3787c7;">:
+</span><span>        y = y - </span><span style="color:#bb4188;">1
+</span><span>        d += </span><span style="color:#bb4188;">4 </span><span>* </span><span style="color:#3787c7;">(</span><span>x - y</span><span style="color:#3787c7;">) </span><span>+ </span><span style="color:#bb4188;">10
+</span><span>img</span><span style="color:#090909;">.</span><span>save</span><span style="color:#3787c7;">(</span><span style="color:#090909;">&quot;</span><span style="color:#669900;">bresenham_octant.png</span><span style="color:#090909;">&quot;</span><span style="color:#3787c7;">)
+</span></code></pre>
+<p>For more on Bresenham's Circle Algorithm I highly recommend:</p>
+<ul>
+<li>
+<p><a href="../assets/draw-a-circle/Everett_Gaius_Vergara.pdf">How to Draw a Circle - Everett Gaius Vergara</a> - an excellent article covering both the Midpoint Circle algorithm and Bresenham's algorithm as well as mathematical derivations and code examples.</p>
+<blockquote>
+<p>Note: the above links now points to a PDF of the printed webpage as the original link no longer works</p>
+</blockquote>
+</li>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://lectureloops.com/bresenhams-circle-drawing-algorithm/">Mid-Point Circle Drawing Algorithm - Lectureloops</a> - a good explanation of the math</p>
+<ul>
+<li>Also their <a rel="noopener nofollow noreferrer" target="_blank" href="https://lectureloops.com/category/uncategorized/computer-science/computer-graphics/">Computer Graphics</a> section may be worth checking out.</li>
+</ul>
+</li>
+<li>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/">Bresenham’s circle drawing algorithm - Geeks for Geeks</a></p>
+</li>
+</ul>
+
+    </article>
+
+            </section>
+        </div>
+        
+
+<footer>
+    <ul>
+        
+                    <li>&copy; 2023 Andrew Prindle</li>
+                    <li>
+                    <a href="https://github.com/vishusandy/vishusandy.github.io" target="_blank"
+                        rel="noreferrer noopener" >Source</a>
+                    </li>
+    </ul>
+</footer>
+
+
+    </body>
+</html>

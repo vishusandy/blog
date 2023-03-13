@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <title>Vishus Blog - Blender Python Setup on Linux</title>
+        <link rel="stylesheet" href='https://vishusandy.github.io/base.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+<link rel="stylesheet" href='https://vishusandy.github.io/code.css'>
+<link rel="stylesheet" href='https://vishusandy.github.io/article.css'>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+
+
+        
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"
+    integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"
+    integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/mathtex-script-type.min.js"
+    integrity="sha384-zWYbd0NBwgTsgIdFKVprSfTh1mbMPe5Hz1X3yY4Sd1h/K1cQoUe36OGwAGz/PcDy"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        
+
+<script src="https://vishusandy.github.io/js/top.js"></script>
+<noscript>
+    <style>
+        #top-link {
+            opacity: 1;
+        }
+    </style>
+</noscript>
+
+
+    </head>
+    <body id="top">
+        
+<header>
+    <div class="title">
+        <a href="https://vishusandy.github.io" title="Home" alt="Homepage">Vishus Blog</a>
+    </div>
+    
+    
+    <div class="menu">
+        <a href="#top" id="top-link" title="Go to top of page">Top</a>
+    </div>
+    
+    
+    
+    <div class="links">
+        <ul>
+            <li><a href="https://vishusandy.github.io/pages/links">Links</a></li><li><a href="https://social.linux.pizza/@vishus" target="_blank" rel="me noreferrer noopener" aria-label="Open Mastodon profile in a new window"><i class="link-icon fa-brands fa-mastodon" alt="Go to my Mastodon profile" title="My Mastodon profile"></i></a></li><li><a href="https://github.com/vishusandy" target="_blank" rel="noreferrer noopener"><i class="link-icon fa-brands fa-github" alt="Go to my GitHub profile" title="My GitGub"></i></a></li>
+        </ul>
+    </div>
+    
+</header>
+
+        
+    <h1 class="title">
+        Blender Python Setup on Linux
+    </h1>
+    <div class="subtitle">
+        <div class="created"><time title="Created" class="created" datetime="2022-12-03">2022-12-03</time></div><div class="updated"><a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/blender_python_setup.md" target="_blank" rel="noreferrer noopener">Updated <time title="Updated" class="updated" datetime="2022-12-06">2022-12-06</time></a></div>
+    </div><p>Using Blender with Python introduces some very cool possibilities; unfortunately I found it very hard to get started.  This is more of a reminder to self, but hopefully it's useful to others as well.</p>
+        
+
+
+<section class="toc" id="toc">
+    <div class="toc">
+        <h5>Table of Contents</h5>
+        <hr>
+        <ul>
+            <li>
+                <a href="https://vishusandy.github.io/blender-python-setup/#installation-script">Installation script</a>
+                <ul>
+                    <li>
+                        <a href="https://vishusandy.github.io/blender-python-setup/#what-it-does">What it does</a>
+                    </li>
+                    </ul>
+            </li><li>
+                <a href="https://vishusandy.github.io/blender-python-setup/#installing">Installing</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/blender-python-setup/#testing-it-out">Testing it out</a>
+                
+            </li><li>
+                <a href="https://vishusandy.github.io/blender-python-setup/#importing-local-python-files">Importing local Python files</a>
+                
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+        <div class="container">
+            <section class="section">
+                
+    <article id="top" class="markdown-body">
+        <h2 id="installation-script"><a class="zola-anchor" href="#installation-script" aria-label="Anchor link for: installation-script">🔗</a>Installation script</h2>
+<p>Since manually downloading and extracting Blender doesn't install the <code>blender.desktop</code> file you won't have a shortcut for it in your menu.  Nor will <code>pip</code> be setup for use with the python version Blender ships (it is independent of the Python installed on your system).  Also it would be nice to store the location of Blender's custom Python executable in a variable, to make interacting with it easier.</p>
+<p>Since this needs to be done every time you want to upgrade to a new version of Blender, I made a script.</p>
+<h3 id="what-it-does"><a class="zola-anchor" href="#what-it-does" aria-label="Anchor link for: what-it-does">🔗</a>What it does</h3>
+<ul>
+<li>downloads and extracts Blender to a specified location</li>
+<li>finds the path for Blender Python (no more digging around for it)</li>
+<li>sets up and installs the <code>blender.desktop</code> file (so you have a nice little shortcut for it)</li>
+<li>ensures <code>pip</code> is installed</li>
+<li>appends <code>BPY</code>, <code>BLENDER_PATH</code>, and <code>BLENDER_VERSION</code> to your <code>.bashrc</code> file so you can easily find Blender</li>
+</ul>
+<h2 id="installing"><a class="zola-anchor" href="#installing" aria-label="Anchor link for: installing">🔗</a>Installing</h2>
+<details open="open">
+<summary>
+At least on Linux it's not too hard to automate this setup.
+</summary>
+<ol>
+<li>
+<p>Download <a href="../assets/blender_python/install_blender.sh">install_blender.sh</a></p>
+</li>
+<li>
+<p>Open a terminal to the directory where you downloaded the <code>install_blender.sh</code> script</p>
+</li>
+<li>
+<p>Make the script executable</p>
+<pre data-lang="bash" style="background-color:#f6f8fa;color:#000000;" class="language-bash "><code class="language-bash" data-lang="bash"><span>chmod +x install_blender.sh
+</span></code></pre>
+</li>
+<li>
+<p>Specify the version to install and where to install it </p>
+<details><summary>Find download link</summary>
+<p>To find the url for the blender <code>.tar.xz</code> archive:</p>
+<ol>
+ <li>Go to <a href="https://www.blender.org/about/website/" target="_blank" rel="noreferrer noopener">Blender.org > About > Website</a></li>
+ <li>Choose a mirror from the section titled <b>External Mirrors</b></li>
+ <li>Choose the <b>release</b> folder</li>
+ <li>Choose the folder with the latest version</li>
+ <li>Copy the link for the file ending with <code>-linux-x64.tar.xz</code></li>
+ </ol>
+ </details>
+<pre data-lang="bash" style="background-color:#f6f8fa;color:#000000;" class="language-bash "><code class="language-bash" data-lang="bash"><span>export BLENDER_URL=</span><span style="color:#669900;">https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+</span><span>export BLENDER_INSTALL=</span><span style="color:#090909;">$</span><span style="color:#669900;">HOME/bin/blender/
+</span></code></pre>
+</li>
+<li>
+<p>Run the <code>install_blender.sh</code> script</p>
+<pre data-lang="bash" style="background-color:#f6f8fa;color:#000000;" class="language-bash "><code class="language-bash" data-lang="bash"><span>./install_blender.sh
+</span></code></pre>
+<blockquote>
+<p>I got this error, but it still works:
+
+<figure>
+    <a href="../assets/blender_python/blender_python_setup_errors.png">
+        <img src="../assets/blender_python/blender_python_setup_errors.png"
+             title="Installation error message" 
+             alt="Error encountered: pip&#x27;s dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts." 
+             class="img-center">
+    </a>
+
+    <figcaption>Everything still works - <code>Successfully installed pip</code></figcaption>
+</figure>
+</p>
+</blockquote>
+</li>
+</ol>
+</details>
+<h2 id="testing-it-out"><a class="zola-anchor" href="#testing-it-out" aria-label="Anchor link for: testing-it-out">🔗</a>Testing it out</h2>
+<details open="open">
+<summary>Let's make sure it worked</summary>
+<ol>
+<li>
+<p>After adding the lines to your <code>.bashrc</code> file that were suggested by the install script, open a new terminal</p>
+</li>
+<li>
+<p>You can install any module but as an example I will use <a href="https://pillow.readthedocs.io/en/stable/" target="_blank" rel="noreferrer noopener">Pillow</a>:</p>
+<pre data-lang="bash" style="background-color:#f6f8fa;color:#000000;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#090909;">&quot;$</span><span style="color:#669900;">BPY</span><span style="color:#090909;">&quot; -</span><span style="color:#676b79;">m</span><span> pip install</span><span style="color:#090909;"> --</span><span style="color:#676b79;">upgrade</span><span> pillow
+</span></code></pre>
+<p>Note: got another error here but it still works</p>
+
+<figure>
+    <a href="../assets/blender_python/blender_python_pillow.png">
+        <img src="../assets/blender_python/blender_python_pillow.png"
+             title="Pillow installation error" 
+             alt="Error encountered: &#x27;pip&#x27;s dependency resolver does not currently take into account all the packages that are installed.  This behavior is the source of the following dependency conflicts.&#x27;" 
+             class="img-center">
+    </a>
+
+    <figcaption>Ignore this message</figcaption>
+</figure>
+</li>
+<li>
+<p>Open blender and click the <code>Scripting</code> workspace
+
+<figure>
+    <a href="../assets/blender_python/scripting_layout.png">
+        <img src="../assets/blender_python/scripting_layout.png"
+             title="Blender scripting layout" 
+             alt="Blender&#x27;s scripting layout is located at the top of the screen towards the center" 
+             class="img-center">
+    </a>
+</figure>
+</p>
+</li>
+<li>
+<p>In Blender's Python console type:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>PIL
+</span></code></pre>
+<p>It should just import the module without any errors.
+
+<figure>
+    <a href="../assets/blender_python/import_pillow.png">
+        <img src="../assets/blender_python/import_pillow.png"
+             title="Blender python console with Pillow imported" 
+             alt="Blender python console showing `import PIL` with no errors" 
+             class="img-center">
+    </a>
+</figure>
+</p>
+</li>
+</ol>
+</details>
+<h2 id="importing-local-python-files"><a class="zola-anchor" href="#importing-local-python-files" aria-label="Anchor link for: importing-local-python-files">🔗</a>Importing local Python files</h2>
+<p>Frustratingly, Blender's python will not automatically resolve imports for local files.  To get around this I append the <code>.blend</code> file's path to <code>sys.path</code>.</p>
+<details open="true">
+<summary>To <b>automatically</b> add the current file's path</summary>
+<ol>
+<li>Download <a href="../assets/blender_python/import_cur_path.py">import_cur_path.py</a> </li>
+<li>Copy it to your <code>scripts/startup</code> folder</li>
+</ol>
+<p>Or run this to download the file directly to your <code>scripts/startup/</code> folder: </p>
+<pre data-lang="bash" style="background-color:#f6f8fa;color:#000000;" class="language-bash "><code class="language-bash" data-lang="bash"><span>curl</span><span style="color:#090909;"> -</span><span style="color:#676b79;">o </span><span style="color:#090909;">&quot;$</span><span style="color:#669900;">BLENDER_PATH/</span><span style="color:#090909;">$</span><span style="color:#669900;">BLENDER_VERSION/scripts/startup/import_cur_path.py</span><span style="color:#090909;">&quot; &quot;</span><span style="color:#669900;">https://vishusandy.github.io/assets/blender_python/import_cur_path.py</span><span style="color:#090909;">&quot;
+</span></code></pre>
+</details>
+<details>
+    <summary>Or <b>manually</b></summary>
+<p>Paste the following into your python console:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>sys
+</span><span style="color:#0077aa;">import </span><span>os
+</span><span style="color:#0077aa;">import </span><span>bpy
+</span><span style="color:#bb4188;">dir </span><span>= os</span><span style="color:#090909;">.</span><span>path</span><span style="color:#090909;">.</span><span>dirname</span><span style="color:#3787c7;">(</span><span>bpy</span><span style="color:#090909;">.</span><span>data</span><span style="color:#090909;">.</span><span>filepath</span><span style="color:#3787c7;">)
+</span><span style="color:#0077aa;">if </span><span>not </span><span style="color:#bb4188;">dir </span><span>in sys</span><span style="color:#090909;">.</span><span>path</span><span style="color:#3787c7;">:
+</span><span>    sys</span><span style="color:#090909;">.</span><span>path</span><span style="color:#090909;">.</span><span>append</span><span style="color:#3787c7;">(</span><span style="color:#bb4188;">dir</span><span style="color:#3787c7;">)
+</span></code></pre>
+</details>
+<p>Now you can import python scripts from the folder where your <code>.blend</code> file is saved.</p>
+<p>For example, if you had a python file called <code>zebra.py</code>, in the same directory as your <code>.blend</code> file, you would import it like:</p>
+<pre data-lang="python" style="background-color:#f6f8fa;color:#000000;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#0077aa;">import </span><span>zebra
+</span></code></pre>
+
+    </article>
+
+            </section>
+        </div>
+        
+
+<footer>
+    <ul>
+        
+                    <li>&copy; 2023 Andrew Prindle</li>
+                    <li>
+                    <a href="https://github.com/vishusandy/vishusandy.github.io" target="_blank"
+                        rel="noreferrer noopener" >Source</a>
+                    </li><li>
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;vishusandy&#x2F;vishusandy.github.io&#x2F;commits&#x2F;main&#x2F;content/blender_python_setup.md" target="_blank" rel="noreferrer noopener">
+                Updated <time title="Updated" class="updated" datetime="2022-12-06">2022-12-06</time></a>
+        </li>
+    </ul>
+</footer>
+
+
+    </body>
+</html>
